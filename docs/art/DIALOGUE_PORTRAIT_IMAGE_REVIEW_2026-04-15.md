@@ -1,0 +1,43 @@
+# DIALOGUE_PORTRAIT_IMAGE_REVIEW_2026-04-15
+
+- summary:
+  - `image/`에 들어온 대화 얼굴 초상 42장을 런타임용 초상 자산으로 전처리 후 게임에 적용했다.
+  - 기존 `DialogueOverlay`는 전신 애니메이션/런타임 클립을 초상처럼 쓰고 있었고, 이번 패스로 얼굴 초상을 우선 사용하도록 변경했다.
+- inputs:
+  - source batch: `image/01-kain.png` ~ `image/42-the-black-gate-warlord.png`
+  - prompt spec: [DIALOGUE_FACE_READY_TO_COPY_PROMPTS.md](D:/dev/game307/docs/art/DIALOGUE_FACE_READY_TO_COPY_PROMPTS.md)
+- decisions:
+  - `PASS`: 얼굴 초상 42장 전체
+  - 전처리 방식은 `rembg(u2netp)` 기반 배경 제거 + 최대 알파 컴포넌트 유지 + 대화창용 `512x512` 캔버스 정렬로 고정
+  - `DialogueOverlay`는 `character / npc / enemy` 순서대로 전용 얼굴 초상을 먼저 찾고, 없을 때만 기존 런타임 애니메이션/타운 아트로 fallback
+  - `WORLD_MAP_UI_READY_TO_COPY_PROMPTS` 계열 `09~17` 파일은 이번 턴에서 신규 변경이 없고, 여전히 `1024x1536` 포스터형 시트라서 적용 대상에서 제외
+- todo:
+  - 실제 스토리 이벤트에 적 보스 대화가 추가되면 `enemy` 초상도 바로 사용 가능하도록 speaker subject id를 연결
+  - 필요시 대화창 초상 표시 크기를 재조정
+- risks:
+  - 일부 소스는 원본 배경이 복잡해 `rembg` 결과가 완벽하지 않을 수 있다. 현재는 런타임 적용 우선으로 정리했고, 추가 미세보정은 후속 턴에서 가능
+  - 얼굴 초상은 적용됐지만 `월드맵/UI 09~17`은 아직 별도 런타임 자산화가 필요하다
+- artifacts_changed:
+  - [generate-dialogue-portrait-assets.py](D:/dev/game307/scripts/generate-dialogue-portrait-assets.py)
+  - [dialoguePortraitAssets.ts](D:/dev/game307/src/game/data/dialoguePortraitAssets.ts)
+  - [BootScene.ts](D:/dev/game307/src/game/scenes/BootScene.ts)
+  - [dialogueOverlay.ts](D:/dev/game307/src/game/ui/dialogueOverlay.ts)
+  - runtime outputs: [public/assets/dialogue](D:/dev/game307/public/assets/dialogue)
+  - generation report: [dialogue-portrait-generation-report.json](D:/dev/game307/output/dialogue-portrait-generation-report.json)
+  - runtime review sheet: [dialogue-portrait-review-sheet.png](D:/dev/game307/output/dialogue-portrait-review-sheet.png)
+  - runtime check results: [results.json](D:/dev/game307/output/dialogue-portrait-runtime-check/results.json)
+- handoff_to:
+  - `asset_agent`
+  - `ui_agent`
+- handoff_notes:
+  - 얼굴 초상은 현재 구조상 바로 사용된다. 다음 이미지 배치는 `월드맵 버튼/게이트/워프/성벽/분수` 쪽으로 이어가면 된다.
+  - `09~17` 월드맵/UI 세트는 이번 턴에 재생성하지 않았다.
+- done_check:
+  - `python scripts/generate-dialogue-portrait-assets.py`: pass
+  - `npm run typecheck`: pass
+  - `npm run build`: pass
+  - `npm run test:smoke`: pass
+  - Playwright runtime check:
+    - `dialogue:character:hero`: pass
+    - `dialogue:npc:orin`: pass
+    - `dialogue:enemy:black-moon-inquisitor`: pass

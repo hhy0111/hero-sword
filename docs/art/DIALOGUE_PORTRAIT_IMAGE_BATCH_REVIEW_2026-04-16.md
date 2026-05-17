@@ -1,0 +1,69 @@
+# DIALOGUE_PORTRAIT_IMAGE_BATCH_REVIEW_2026-04-16.md
+
+- summary:
+  - `image/`에 들어온 대화 초상 리메이크 배치를 다시 열어보고 `적용 가능`과 `재생성 필요`로 나눴다.
+  - 이번 판정 기준은 `도트 캐릭터와 같은 사람으로 보이는가`, `흐림/반투명/오염 없이 바로 런타임에 쓸 수 있는가`이다.
+- inputs:
+  - [dialogue-remake-batch-2026-04-16.png](D:/dev/game307/output/dialogue-remake-batch-2026-04-16.png)
+  - 개별 원본 PNG 23장
+- decisions:
+  - `APPLY`
+    - `01-kain.png` -> `hero`
+    - `04-dorgan.png` -> `dorgan`
+    - `05-kiera.png` -> `kiera`
+    - `06-helma.png` -> `helma`
+    - `09-iris.png` -> `iris`
+    - `10-nazir.png` -> `nazir`
+    - `11-laila-2.png` -> `laila`
+    - `17-neri.png` -> `neri`
+    - `18-the-courier-of-lumen-village.png` -> `runner_lane`
+    - `23-a-generic-armor-merchant-portrait-for-town-runtime-use.png` -> `armor_merchant`
+  - `REMAKE_REQUIRED`
+    - `02-sera.png`
+      - 이유: 메이지보다 과한 글래머/갑옷 인상이 강함
+    - `03-theo.png`
+      - 이유: 흐리고 카인과 너무 비슷해 궁수 정체성이 약함
+    - `07-marin.png`
+      - 이유: 흐림과 반투명 오염이 심함
+    - `08-fin.png`
+      - 이유: 초상 전체가 심하게 흐려서 사용 불가
+    - `12-hakan.png`
+      - 이유: 흐림이 심하고 성별/역할 판독이 약함
+    - `13-seraphin.png`
+      - 이유: 흐림과 반투명 오염이 심함
+    - `14-micaela.png`
+      - 이유: 흐림과 반투명 오염이 심함
+    - `15-lucian.png`
+      - 이유: 암살자 정체성과 맞지 않고 금빛 성기사 계열로 보임
+    - `16-orin.png`
+      - 이유: 무기 상인이 아니라 암살자/로그처럼 보임
+    - `19-the-young-resident-of-lumen-village.png`
+      - 이유: 마을 어린 주민보다 모험가/전령에 가까움
+    - `20-a-master-blacksmith-dialogue-portrait-for-town-runtime-use.png`
+      - 이유: 대장장이가 아니라 포션 상인/연금술사처럼 보임
+    - `21-ria.png`
+      - 이유: 완전히 다른 남성 대장장이형 초상이 들어옴
+    - `22-marta.png`
+      - 이유: 흐림과 반투명 오염이 심함
+  - `NOT_NEEDED`
+    - `11-laila-1.png`
+      - 이유: 같은 대상의 대체안 중 `11-laila-2.png`가 더 정확해 이번 배치에서는 제외
+- applied_runtime_outputs:
+  - [public/assets/dialogue/characters/hero.png](D:/dev/game307/public/assets/dialogue/characters/hero.png)
+  - [public/assets/dialogue/characters/dorgan.png](D:/dev/game307/public/assets/dialogue/characters/dorgan.png)
+  - [public/assets/dialogue/characters/kiera.png](D:/dev/game307/public/assets/dialogue/characters/kiera.png)
+  - [public/assets/dialogue/characters/helma.png](D:/dev/game307/public/assets/dialogue/characters/helma.png)
+  - [public/assets/dialogue/characters/iris.png](D:/dev/game307/public/assets/dialogue/characters/iris.png)
+  - [public/assets/dialogue/characters/nazir.png](D:/dev/game307/public/assets/dialogue/characters/nazir.png)
+  - [public/assets/dialogue/characters/laila.png](D:/dev/game307/public/assets/dialogue/characters/laila.png)
+  - [public/assets/dialogue/npcs/neri.png](D:/dev/game307/public/assets/dialogue/npcs/neri.png)
+  - [public/assets/dialogue/npcs/runner_lane.png](D:/dev/game307/public/assets/dialogue/npcs/runner_lane.png)
+  - [public/assets/dialogue/npcs/armor_merchant.png](D:/dev/game307/public/assets/dialogue/npcs/armor_merchant.png)
+- output_artifacts:
+  - [applied-report.json](D:/dev/game307/output/dialogue-remake-apply-2026-04-16/applied-report.json)
+  - [applied-review-sheet.png](D:/dev/game307/output/dialogue-remake-apply-2026-04-16/applied-review-sheet.png)
+- handoff_to:
+  - `asset_agent`
+- handoff_notes:
+  - 이번 배치에서 적용된 10장은 바로 써도 된다
+  - 나머지는 다음 얼굴 재생성 배치로 넘기는 것이 맞다

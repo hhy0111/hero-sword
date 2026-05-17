@@ -1,0 +1,76 @@
+# BATTLE_RESULT_VISUAL_UPGRADE_PREP_2026-04-16.md
+
+- summary:
+  - 전투 화면과 전투 후 결과 화면은 현재 `atlas 기반 버튼 + 단색 패널 + 사각 오버레이` 조합이 강해서 배경과 분리된 임시 UI처럼 보인다.
+  - 이번 문서는 `테두리를 이미지화할지`, `테두리를 줄이거나 없앨지`를 결정하기 위한 준비 문서다.
+- inputs:
+  - [BattleScene.ts](D:/dev/game307/src/game/scenes/BattleScene.ts)
+  - [ResultScene.ts](D:/dev/game307/src/game/scenes/ResultScene.ts)
+- current_state:
+  - 전투 화면:
+    - `createPanel()` 2개가 상단/중앙 전투 영역을 큰 베이지 패널로 감싼다
+    - 추가 `rectangle()` 오버레이가 여러 겹 들어가 배경 위 전투가 아니라 보드판 위 전투처럼 보인다
+    - HP 바 배경도 단색 직사각형이라 캐릭터 위에 뜬 UI라는 느낌이 약하다
+  - 결과 화면:
+    - 결과 카드가 큰 베이지 단일 패널 1장으로 처리된다
+    - 스테이지 배경이 있어도 결과 패널이 거의 모든 시선을 가져간다
+- decisions:
+  - 디자인 방향은 두 갈래로 준비한다
+  - `option_a_image_frame`
+    - 전투/결과용 전용 프레임 이미지를 만든다
+    - 장점:
+      - 가장 빠르게 퀄리티를 올릴 수 있다
+      - 상단 정보판, 하단 액션판, 결과 카드가 같은 가족형 디자인으로 통일된다
+    - 단점:
+      - 이미지 제작 수가 늘어난다
+      - 프레임 크기 변경 시 다시 잘라야 한다
+  - `option_b_border_light`
+    - 큰 베이지 패널을 없애고 얇은 다크 글라스형 오버레이 + 금속/석재 라인만 남긴다
+    - 장점:
+      - 전투 배경을 가장 잘 살린다
+      - 이미지 의존도가 낮다
+    - 단점:
+      - 지금 코드 구조를 직접 재정리해야 한다
+      - 잘못하면 너무 밋밋해질 수 있다
+  - 권장:
+    - 전투는 `option_b_border_light` 우선
+    - 결과 화면은 `option_a_image_frame` 우선
+    - 이유:
+      - 전투는 배경이 계속 보여야 한다
+      - 결과는 요약 카드 느낌이 있어도 된다
+- recommended_execution:
+  - 전투 화면:
+    - 상단 적 정보 영역은 `얇은 프레임 + 반투명 다크 배경`
+    - 중앙 전투 보드 베이지 패널 제거
+    - 하단 로그/스킬/오토 패널은 폭을 줄이고 배경 투명도만 남김
+    - HP 바는 `작은 이미지 프레임 + 컬러 바` 구조로 교체
+  - 결과 화면:
+    - 중앙 결과 카드 1장을 `결과 전용 프레임 이미지`로 교체
+    - 배경은 더 넓게 노출
+    - 버튼은 이미지 버튼 시트 적용 대상으로 분리
+- implementation_notes:
+  - 실제 단색 문제를 만드는 핵심 지점:
+    - [BattleScene.ts](D:/dev/game307/src/game/scenes/BattleScene.ts) `drawLayout()`
+    - [ResultScene.ts](D:/dev/game307/src/game/scenes/ResultScene.ts) `drawLayout()`
+  - 전투 쪽 우선 제거 후보:
+    - `createPanel(this, 180, 88, 332, 136, ...)`
+    - `createPanel(this, 180, 358, 332, 398, ...)`
+    - 중앙/하단 `rectangle()` 베이지/갈색 판들
+  - 결과 쪽 우선 제거 후보:
+    - `createPanel(this, 180, 176, 322, 304, ...)`
+- todo:
+  - 전투/결과 전용 UI 이미지가 들어오면 코드 치환
+  - 이미지가 늦으면 먼저 다크 오버레이형 코드 구조로 전환
+- risks:
+  - 프레임 이미지만 추가하고 내부 텍스트/바 레이아웃을 그대로 두면 촌스럽게 섞일 수 있다
+  - 전투는 가독성을 해치지 않는 선에서 배경 노출량을 늘려야 한다
+- artifacts_changed:
+  - this file only
+- handoff_to:
+  - `ui_agent`
+  - `asset_agent`
+- handoff_notes:
+  - 전투는 배경을 살리는 방향
+  - 결과는 카드형 프레임을 허용하는 방향
+- done_check:
+  - 전투/결과 단색 테두리 문제의 원인과 업그레이드 방향 정리 완료

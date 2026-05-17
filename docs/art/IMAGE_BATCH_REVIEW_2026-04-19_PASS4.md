@@ -1,0 +1,35 @@
+- summary:
+  - `2026-04-19 PASS4`에서는 이번 이미지 배치 중 실사용 가능한 것만 다시 판정하고 게임 씬에 연결했다.
+  - 핵심은 `알파 보정 재생성`, `궁궐 NPC 시트 채택`, `스테이지 카드 프레임 채택`, `불합격 프레임 비활성화`다.
+- inputs:
+  - `image/03-lumen-palace-core-runtime-npc-sheet-remake.png`
+  - `image/07-stage-select-route-card-frame-sheet.png`
+  - `image/06-stage-select-header-preview-frame.png`
+  - 기존 PASS3 적용 이미지 전체
+- decisions:
+  - `03-lumen-palace-core-runtime-npc-sheet-remake.png`: PASS
+    - `king`, `queen`, `guard`, `scholar` 추출 후 `palace` 씬 fallback 런타임 자산으로 연결
+  - `07-stage-select-route-card-frame-sheet.png`: PASS
+    - `open`, `locked`, `selected`, `boss` 프레임으로 분할 후 `stage-select` 카드 배경으로 연결
+  - `06-stage-select-header-preview-frame.png`: FAIL
+    - 내부에 체커보드가 보여 실제 화면 품질을 해친다. 연결 제거.
+- todo:
+  - `남쪽 게이트 기준 성벽 타일 세트`
+  - `상점 상품 카드/헤더 전용 UI 프레임`
+  - `결과 클리어 프레임 최종본`
+  - `궁궐 접견실 최종 배경`
+- risks:
+  - `preview_frame` 계열 이미지는 투명 처리 결과를 직접 화면에서 다시 검증해야 한다.
+  - `button/frame` 계열은 언어 길이 변화와 겹침을 함께 검수해야 한다.
+- artifacts_changed:
+  - `public/assets/world/palace/npcs/*.png`
+  - `public/assets/ui/stage-select/route_card_*.png`
+  - `scripts/import_image_batch_2026_04_19.py`
+- handoff_to:
+  - `asset_agent`
+- handoff_notes:
+  - 다음 배치는 `성벽 타일 세트`를 우선으로 받아야 한다. 지금 마을 외곽 품질 상한이 여기서 막힌다.
+- done_check:
+  - `palace npc sheet`: PASS
+  - `stage route card frame sheet`: PASS
+  - `stage preview frame`: FAIL_HOLD

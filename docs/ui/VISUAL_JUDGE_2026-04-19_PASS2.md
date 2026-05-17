@@ -1,0 +1,42 @@
+- summary:
+  - `2026-04-19` 추가 시각 정리 패스에서 `월드맵`, `스테이지 선택`, `결과 화면`, `상점`, `남쪽 게이트`를 실제 캡처 기준으로 다시 검수했다.
+  - 이전 상태의 핵심 문제는 `과한 프레임 장식`, `텍스트 오버플로우`, `현장 오버레이 문구 과다`, `게이트 복귀 동선 막힘`이었다.
+  - 이번 패스는 화면 구조 단순화와 실제 플레이 가독성 회복에 집중했다.
+- inputs:
+  - `output/store-screenshots/store_02_world_map.png`
+  - `output/store-screenshots/store_03_stage_select.png`
+  - `output/manual-ui-pass-2026-04-19/shop.png`
+  - `output/manual-ui-pass-2026-04-19/result.png`
+  - `output/town-dev-preview/manual-checks/gate-flow.png`
+- decisions:
+  - `WorldMapScene`은 타일형 배경을 제거하고, 대륙 랜드마크가 가장 먼저 읽히는 구조로 유지한다.
+  - `StageSelectScene`은 장식 프레임보다 정보량이 문제였다고 판단하고, 카드당 정보를 `제목 + 상태` 수준으로 축소한다.
+  - `ResultScene`은 실사용 정보만 남긴다.
+  - `ShopScene`은 기존 레이아웃을 유지 보수하는 대신 재배치한다.
+  - `VillageLobbyScene`의 남쪽 게이트는 건물 라벨과 상호작용 문구를 줄이고, 귀환 스폰을 더 북쪽으로 옮긴다.
+- todo:
+  - `남쪽 성벽 타일 세트` 최종본을 받으면 게이트 좌우 벽을 더 자연스럽게 마감한다.
+  - `궁궐 내부 전용 NPC 도트 시트` 최종본을 받으면 접견실 임시 런타임 인물을 교체한다.
+  - `스테이지 선택 배경/헤더 최종 아트`가 오면 상단 패널을 한 번 더 폴리시한다.
+- risks:
+  - 쇼케이스 스냅샷은 모든 대륙이 열려 있어서 `잠김 + 반투명 + 비활성` 상태를 화면 캡처로 직접 보여주지는 못한다.
+  - 남쪽 게이트는 동선은 열렸지만, 최종 벽 모듈 아트가 없으면 아직 완성형으로 보이지는 않는다.
+- artifacts_changed:
+  - `src/game/scenes/WorldMapScene.ts`
+  - `src/game/scenes/StageSelectScene.ts`
+  - `src/game/scenes/ResultScene.ts`
+  - `src/game/scenes/ShopScene.ts`
+  - `src/game/scenes/VillageLobbyScene.ts`
+  - `src/game/data/town.ts`
+- handoff_to:
+  - `asset_agent`
+  - `ui_agent`
+- handoff_notes:
+  - `asset_agent`: 남쪽 성벽 모듈과 궁궐 내부 NPC 최종 시트가 들어오면 마지막 품질 점프가 가능하다.
+  - `ui_agent`: 현재 구조는 정리됐고, 다음 작업은 정보 밀도를 더 줄이는 미세 폴리시다.
+- done_check:
+  - `World Map`: PASS
+  - `Stage Select`: PASS_WITH_POLISH_GAP
+  - `Shop`: PASS
+  - `Result`: PASS
+  - `Village South Gate`: PASS_WITH_ART_GAP

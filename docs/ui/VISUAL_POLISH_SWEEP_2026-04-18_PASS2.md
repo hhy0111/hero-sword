@@ -1,0 +1,45 @@
+- summary:
+- 2026-04-18 후속 시각 정리 패스에서 월드맵 과대 오버레이, 전투 상단 HUD 오염, 궁궐 임시 문구, 자동 검수 스크립트의 boot 누락 문제를 정리했다.
+- inputs:
+- 사용자 스크린샷 기준 문제 목록
+- `output/manual-verify-2026-04-18-booted-02/*.png`
+- `output/manual-verify-2026-04-18-battle-world-final/*.png`
+- 기존 시각 정리 문서
+- `docs/ui/VISUAL_POLISH_SWEEP_2026-04-18.md`
+- decisions:
+- 월드맵 랜드마크 이미지는 현재 배치가 `아이콘`이 아니라 `대형 장면 일러스트`에 가까워 카드 위 오버레이 사용을 중단했다.
+- 전투 상단 HUD는 전달된 `top_hud_frame`을 그대로 노출하지 않고, 코드 기반 상단 패널 + 불투명 오버레이로 오염을 가렸다.
+- 궁궐 내부는 영어 임시 라벨 대신 한국어 기본 문구를 사용하도록 fallback을 바꿨다.
+- 디버그 브리지의 active scene 판정은 `활성 씬만` 보도록 바꿔 검수 스크립트가 비활성 `result` 씬을 잘못 집는 문제를 막았다.
+- 캡처 스크립트는 모두 `boot -> village`를 먼저 밟게 바꿔, 자산 미로딩 상태를 잘못 찍는 문제를 막았다.
+- todo:
+- 오른쪽 스테이지 게이트는 전용 `horizontal / vertical / corner / bottom` 성벽 키트가 들어오면 현재 절충 배치를 교체
+- 월드맵 랜드마크는 `작은 아이콘형` 재제작이 필요함
+- 궁궐 전용 런타임 NPC 시트와 대화 초상은 아직 최종 아트가 아님
+- 전투 상단 HUD는 현재 코드 보정 상태이며, 깨끗한 최종 프레임 이미지가 오면 교체 필요
+- 결과 화면용 `clear` 전용 프레임도 아직 필요
+- risks:
+- 월드맵 상단 프리뷰 일부는 원본 이미지 자체가 밝고 흐려 보여 대비가 약하다
+- 마을 오른쪽 게이트는 자산 부족으로 구조는 정리됐지만 최종 아트 품질은 아직 아님
+- 궁궐 법정 인물은 현재 임시 스탠디 텍스처라 최종 캐릭터성은 부족하다
+- artifacts_changed:
+- `src/game/core/game.ts`
+- `src/game/scenes/WorldMapScene.ts`
+- `src/game/scenes/BattleScene.ts`
+- `src/game/scenes/VillageLobbyScene.ts`
+- `src/game/scenes/PalaceScene.ts`
+- `scripts/capture-store-screenshots.mjs`
+- `scripts/run-town-manual-checks.mjs`
+- `scripts/capture-animation-viewer.mjs`
+- handoff_to:
+- `asset_agent`
+- `qa_agent`
+- handoff_notes:
+- 월드맵 랜드마크는 현재 로딩/배치는 정상이나, 아이콘형이 아니라서 표시를 껐다. 다음 이미지 배치는 `작은 고립형 랜드마크 아이콘` 기준으로 받아야 한다.
+- 전투 HUD는 자산이 다시 들어오기 전까지 현재 코드 패널이 기준 상태다.
+- 검수 자동화는 이제 `boot`를 먼저 시작하므로 이후 캡처 결과를 신뢰해도 된다.
+- done_check:
+- 월드맵 카드 위 대형 랜드마크 오버레이가 제거됐다.
+- 전투 상단 HUD의 깨진 프레임 노출이 크게 줄었다.
+- 궁궐 내부 기본 문구가 한국어 기준으로 정리됐다.
+- 자동 캡처 스크립트가 `boot` 누락 없이 자산 로딩 후 씬을 캡처한다.

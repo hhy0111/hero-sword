@@ -1,0 +1,56 @@
+- summary:
+  - 2026-04-18 추가 배치 이미지를 실제 내용 기준으로 다시 판정했다.
+  - 파일명과 실제 내용이 맞지 않는 경우가 많아, 이번 문서는 `파일명 기준`이 아니라 `실제 사용 위치 기준`으로 정리한다.
+- inputs:
+  - `image/` 폴더의 2026-04-18 추가 이미지
+  - 사용자 피드백:
+    - 궁궐 북측 이미지 이질감
+    - 성벽 가로/세로/코너 부족
+    - 월드 루트 랜드마크 표시 부족
+    - 스테이지 선택 / 전투 / 결과 화면 미완성
+- decisions:
+  - `PATCH`: `03-lumen-center-plaza-tile-sheet-remake.png`
+    - 이유: 실제로는 광장 타일이 아니라 성벽 모듈 세트였다. 가로/세로/코너/타워 조각으로 잘라 사용 가능하다.
+  - `PATCH`: `04-primary-ui-button-frame-sheet-remake.png`
+    - 이유: 실제로는 버튼 시트가 아니라 궁궐 북측 게이트 랜드마크였다. 런타임 게이트로 사용 가능하다.
+  - `PATCH`: `05-utility-ui-button-frame-sheet-remake.png`
+    - 이유: 실제로는 유틸 버튼이 아니라 오른쪽 스테이지 게이트 아치였다. 런타임 게이트로 사용 가능하다.
+  - `PATCH`: `06-battle-ui-button-frame-sheet-remake.png`
+    - 이유: 실제로는 빈 버튼 프레임 시트였다. 전역 버튼 프레임 상태로 사용 가능하다.
+  - `PATCH`: `07-battle-bottom-command-bar-frame-remake.png`
+    - 이유: 전투 하단 커맨드 프레임 계열로 직접 사용 가능하다.
+  - `PATCH`: `09-palace-core-runtime-npc-sheet-remake.png`
+    - 이유: 실제로는 왕궁 NPC 시트가 아니라 전투 상단 HUD 프레임이었다. 상단 HUD로 사용 가능하다.
+  - `KEEP`: `01-world-landmark-sheet-remake.png`
+    - 이유: 이미 이전 배치에서 썸네일/랜드마크 추출에 활용한 상태다. 이번 턴에서는 추가 교체 없이 월드맵 노출만 활성화했다.
+  - `HOLD`: `08-world-route-node-card-frame-sheet-2.png`
+    - 이유: 완전 불합격은 아니지만, 현재 `sheet-1`과 새 버튼/카드 정리만으로도 노드 카드 구조가 유지된다. 지금 교체 우선순위는 아니다.
+  - `HOLD`: `08-battle-result-clear-frame-remake.png`
+    - 이유: 결과 화면 전체 톤과 아직 잘 맞지 않고, 지금은 코드형 결과 레이아웃이 더 안정적이다.
+  - `HOLD`: `10-optional-follow-up-palace-exterior-entry-scene.png`
+    - 이유: 바로 쓰기에는 궁궐 외곽 톤이 게임 내 환경과 어긋난다. 최종 궁궐 외관 프롬프트로 재생산하는 편이 낫다.
+- todo:
+  - 궁궐 북측 최종 외관 이미지 재생산
+  - 궁궐 접견실 최종 배경 이미지 재생산
+  - 스테이지 선택 전용 배경/헤더/카드 프레임 재생산
+  - 전투 상단 HUD / 하단 커맨드 / 결과 프레임 최종 세트 재생산
+- risks:
+  - 현재 적용 자산 중 일부는 `임시 최적화`이지 `최종 승인`은 아니다.
+  - `04`, `05`, `09`는 실제 용도와 파일명이 다르므로 다음 배치에서 혼동이 재발할 수 있다.
+- artifacts_changed:
+  - `scripts/import_image_batch_2026_04_18_followup.py`
+  - `public/assets/world/town/landmarks/*`
+  - `public/assets/world/palace/north_gate.png`
+  - `public/assets/ui/buttons/*`
+  - `public/assets/ui/battle/top_hud_frame.png`
+  - `public/assets/ui/battle/bottom_command_frame.png`
+- handoff_to:
+  - `asset_agent`
+  - `qa_agent`
+- handoff_notes:
+  - 이번 배치에서 진짜 바로 쓸 수 있던 것은 `성벽 모듈`, `궁궐/스테이지 게이트`, `공용 버튼 프레임`, `전투 상단/하단 프레임`이었다.
+  - 남은 궁궐/스테이지 선택/결과 화면은 새 이미지가 와야 최종 마감이 가능하다.
+  - 다음 이미지 생성은 [VISUAL_CLEANUP_REMAKE_READY_TO_COPY_PROMPTS_2026-04-18.md](/D:/dev/game307/docs/art/VISUAL_CLEANUP_REMAKE_READY_TO_COPY_PROMPTS_2026-04-18.md) 기준으로 진행하면 된다.
+- done_check:
+  - 이번 추가 배치의 사용 가능 자산과 보류 자산을 분리했다.
+  - 실제 게임에 연결된 파일과 아직 추가 생산이 필요한 파일을 나눠서 추적할 수 있다.

@@ -1,0 +1,78 @@
+- summary:
+  - Re-ran visual judgment after the current-image-first cleanup pass.
+  - Split the remaining work into `current-image fixable` and `new-image required`.
+- inputs:
+  - `output/store-screenshots/store_02_world_map.png`
+  - `output/store-screenshots/store_03_stage_select.png`
+  - `output/store-screenshots/store_04_party.png`
+  - `output/store-screenshots/store_05_equipment.png`
+  - `output/store-screenshots/store_06_battle_field.png`
+  - `output/store-screenshots/store_07_battle_boss.png`
+  - `output/town-dev-preview/manual-checks/gate-flow.png`
+  - `output/town-dev-preview/manual-checks/palace-flow.png`
+  - `output/manual-ui-pass-2026-04-19/shop.png`
+  - `output/manual-ui-pass-2026-04-19/result.png`
+- decisions:
+  - `CURRENT_IMAGE_FIXABLE / DONE_OR_STABLE`
+    - `WorldMapScene`
+      - Landmark-first layout is readable.
+      - Locked-state treatment is now structurally correct.
+    - `StageSelectScene`
+      - Current art is sufficient.
+      - Remaining work is typography polish, not an art blocker.
+    - `ResultScene`
+      - Current background + simplified information hierarchy is usable.
+      - Final result frames are optional polish, not a blocker.
+    - `Village south gate flow`
+      - The player is no longer trapped by the world-gate return flow.
+      - Current gate art is usable for now.
+    - `ShopScene`
+      - Current shop frames are usable.
+      - Remaining issue is layout polish, not missing art.
+  - `CURRENT_IMAGE_FIXABLE / STILL_NEEDS_CODE_POLISH`
+    - `PartyScene`
+      - Major overlap is removed.
+      - Still needs one more typography pass, but does not require new art.
+    - `EquipmentScene`
+      - Major collision is reduced.
+      - Still needs one more header/footer polish pass, but does not require new art.
+    - `BattleScene`
+      - Current battle art is usable.
+      - The remaining problem is combat spacing / VFX density / HUD composition, not missing core art.
+    - `PalaceScene`
+      - Current palace background and NPC sprites are usable.
+      - Remaining issue is scene composition and NPC staging, not an immediate image blocker.
+  - `NEW_IMAGE_REQUIRED / FINAL_QUALITY_ONLY`
+    - `South wall tile kit`
+      - A seamless south-wall modular set with gate-specific joins is still needed for a fully convincing town boundary.
+    - `Battle result clear/fail frame`
+      - Optional for final shipping polish.
+      - Current text-first result screen is already functional.
+    - `Battle / utility alternate button sets`
+      - Optional polish only.
+      - Shared runtime button set is already usable.
+    - `Palace final audience hall repaint`
+      - Only needed if the current hall must be pushed to a stricter in-game pixel-art match.
+- todo:
+  - Final code-only polish pass on `PartyScene`.
+  - Final code-only polish pass on `EquipmentScene`.
+  - Reduce visual congestion in `BattleScene`.
+  - Re-stage palace NPCs one more time if the current positions still feel floaty in manual play.
+  - Request the final south-wall tile kit only after the layout is frozen.
+- risks:
+  - `PartyScene` and `EquipmentScene` are no longer broken, but still read as `dev-polish incomplete`.
+  - `BattleScene` can still feel busy during heavy effect overlap.
+  - `PalaceScene` can still read as layered assets if NPC staging is not tightened further.
+- artifacts_changed:
+  - `docs/ui/VISUAL_JUDGE_2026-04-19_PASS4.md`
+- handoff_to:
+  - `ui_agent`
+  - `asset_agent`
+  - `qa_agent`
+- handoff_notes:
+  - Do not request more art for `PartyScene` or `EquipmentScene`; finish those in code.
+  - Do not block on new art for `BattleScene`; spacing and effect cleanup should happen first.
+  - The only hard environment art gap left is the final south-wall tile kit.
+- done_check:
+  - Latest screenshots reopened
+  - Remaining work split into `current-image fixable` vs `new-image required`

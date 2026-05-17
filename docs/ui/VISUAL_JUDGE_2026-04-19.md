@@ -1,0 +1,50 @@
+- summary:
+  - `2026-04-19` 이미지 배치 재적용 후 실제 화면 기준 수동 판정을 기록했다.
+  - 이번 판정은 `부트 이후 실제 씬 렌더` 기준으로만 인정했다.
+  - `직접 씬 점프` 캡처는 preload 누락으로 왜곡될 수 있어 기준에서 제외했다.
+- inputs:
+  - `image/*`
+  - `scripts/import_image_batch_2026_04_19.py`
+  - `output/town-dev-preview/manual-checks/*`
+  - `output/store-screenshots/store_01_village.png`
+  - `output/store-screenshots/store_02_world_map.png`
+  - `output/store-screenshots/store_03_stage_select.png`
+  - `output/store-screenshots/store_06_battle_field.png`
+  - `output/manual-judge-2026-04-19-pass2/result-booted.png`
+- decisions:
+  - `궁궐 핵심 NPC 시트`는 사용 가능 판정으로 채택했다.
+  - `스테이지 카드 프레임 시트`는 사용 가능 판정으로 채택했다.
+  - `스테이지 상단 미리보기 프레임`은 체커보드가 그대로 보여서 불합격 판정 후 비활성화했다.
+  - `성벽/게이트`는 이번 배치로 알파 오류는 해결됐지만, 최종 구조물 품질은 아직 미완이다.
+  - `결과 화면`은 현재 프레임 사용을 유지하되, 더 깔끔한 최종 프레임이 들어오면 교체하는 방향으로 유지한다.
+- todo:
+  - `남쪽 게이트 기준 성벽 타일 세트` 최종본을 받으면 마을 외곽을 모듈식으로 재배치
+  - `상점 전용 UI 프레임` 또는 `상품 카드 프레임` 추가 검토
+  - `결과 화면 클리어 프레임` 최종본 교체
+  - `궁궐 접견실` 최종 톤 매칭 배경 교체
+- risks:
+  - `result_clear_frame`는 하단 빈 슬롯 장식이 남아 있어 구조적으로는 아직 과하다.
+  - `shop`은 usable 수준이지만 여전히 레이아웃 비중이 커서 전용 UI 아트가 없으면 상용 화면 느낌이 약하다.
+  - `wall/gate`는 깨짐은 줄었지만 최종 미장착 모듈 세트가 없으면 완성도 상한이 있다.
+- artifacts_changed:
+  - `scripts/import_image_batch_2026_04_19.py`
+  - `src/game/data/palaceRuntimeArt.ts`
+  - `src/game/data/stageSelectRuntimeArt.ts`
+  - `src/game/scenes/PalaceScene.ts`
+  - `src/game/scenes/StageSelectScene.ts`
+  - `src/game/scenes/BattleScene.ts`
+  - `src/game/scenes/ResultScene.ts`
+  - `src/game/scenes/ShopScene.ts`
+- handoff_to:
+  - `asset_agent`
+  - `ui_agent`
+- handoff_notes:
+  - `asset_agent`: 다음 우선순위는 `성벽 타일 세트`, `상점 전용 UI 프레임`, `결과 클리어 프레임`, `궁궐 접견실 최종 배경`
+  - `ui_agent`: 현재 usable 판정은 났지만 `shop`과 `result`는 정보 밀도/프레임 조합 최종 정리가 더 필요하다.
+- done_check:
+  - `Village`: PASS_WITH_ART_GAP
+  - `Palace`: PASS_WITH_ART_GAP
+  - `World Map`: PASS
+  - `Stage Select`: PASS_AFTER_PREVIEW_FRAME_DISABLE
+  - `Battle`: PASS_WITH_POLISH_GAP
+  - `Result`: PASS_WITH_ART_GAP

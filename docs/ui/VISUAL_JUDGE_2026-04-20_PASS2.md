@@ -1,0 +1,38 @@
+- summary:
+  - `ResultScene`를 실캡처 기준으로 다시 검수했고, 깨져 보이던 원인은 `result_clear_frame.png`를 세로 풀패널로 강제 확대해 비율이 무너진 점이었다.
+  - 이번 패스에서는 결과 화면을 `배경 + 코드 패널 + 정상 버튼 정렬` 구조로 재정리했다.
+- inputs:
+  - 사용자 캡처: 결과 화면 버튼/테두리 깨짐 지적
+  - 런타임 자산:
+    - `public/assets/ui/battle/result_clear_frame.png`
+    - `public/assets/ui/buttons/frame_normal.png`
+    - `public/assets/ui/buttons/frame_hover.png`
+    - `public/assets/ui/buttons/frame_pressed.png`
+    - `public/assets/ui/buttons/frame_disabled.png`
+  - 재현용 스테이지:
+    - `continent_01`
+    - `stage_01_01`
+- decisions:
+  - `result_clear_frame.png`는 현재 비율상 `세로 결과 프레임`으로 쓰지 않는다.
+  - 결과 화면은 현재 배경 이미지를 유지한다.
+  - 새 배경 재요청은 필요 없다.
+  - 장식 프레임을 다시 쓰려면 `세로형 결과 프레임`을 별도로 받아야 한다.
+- todo:
+  - 결과 화면은 현재 상태로 유지하고, 후속 폴리시 때만 정보 밀도 미세조정
+  - 세로 전용 결과 프레임을 원할 경우만 추가 아트 요청
+- risks:
+  - 현재 구조는 안정적이지만, 장식성은 `전용 세로 프레임`이 들어온 경우보다 단순하다.
+- artifacts_changed:
+  - `src/game/scenes/ResultScene.ts`
+  - `output/manual-verify-2026-04-20-result/result.png`
+  - `output/manual-verify-2026-04-20-result-pass2/result.png`
+  - `output/manual-verify-2026-04-20-result-pass3/result.png`
+- handoff_to:
+  - `ui_agent`
+- handoff_notes:
+  - 결과 화면은 이제 `새 배경 필요`가 아니라 `선택형 장식 프레임 추가` 수준이다.
+  - 다음 UI 폴리시는 `BattleScene`과 `StageSelectScene` 쪽이 더 우선이다.
+- done_check:
+  - `npm run typecheck`
+  - 결과 화면 직접 캡처 재현 완료
+  - 버튼/텍스트/패널 충돌 제거 확인

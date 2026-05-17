@@ -1,0 +1,108 @@
+# BATTLE_RESULT_PALACE_ASSET_TARGETS_2026-04-16.md
+
+- summary:
+  - 전투/결과 UI 업그레이드와 루멘 궁성 확장을 위해 필요한 추가 이미지 대상을 정리한다.
+  - 이번 문서는 `필요 이미지 목록` 중심이며, 복사용 프롬프트 문서는 다음 단계에서 분리해도 된다.
+- inputs:
+  - [BATTLE_RESULT_VISUAL_UPGRADE_PREP_2026-04-16.md](D:/dev/game307/docs/ui/BATTLE_RESULT_VISUAL_UPGRADE_PREP_2026-04-16.md)
+  - [LUMEN_PALACE_STORY_EXPANSION_2026-04-16.md](D:/dev/game307/docs/story/LUMEN_PALACE_STORY_EXPANSION_2026-04-16.md)
+- decisions:
+  - battle_ui_assets:
+    - `battle_top_info_frame_v001.png`
+      - 상단 적 정보/스테이지 정보 프레임
+    - `battle_bottom_command_frame_v001.png`
+      - 하단 로그/명령/UI 영역 프레임
+    - `battle_hp_bar_frame_ally_v001.png`
+      - 아군 HP 바 프레임
+    - `battle_hp_bar_frame_enemy_v001.png`
+      - 적 HP 바 프레임
+    - `battle_skill_button_sheet_v001.png`
+      - 전투 전용 버튼 시트
+    - `battle_auto_button_sheet_v001.png`
+      - AUTO 버튼 시트
+    - `battle_retreat_button_sheet_v001.png`
+      - RETREAT 버튼 시트
+  - result_ui_assets:
+    - `result_panel_clear_v001.png`
+      - 클리어 결과 카드 프레임
+    - `result_panel_fail_v001.png`
+      - 실패 결과 카드 프레임
+    - `result_star_badge_sheet_v001.png`
+      - 별 획득 배지
+    - `result_reward_row_frame_v001.png`
+      - 보상 행 프레임
+  - palace_exterior_assets:
+    - `lumen_palace_exterior_v001.png`
+      - 왕궁 외부 정면 건물
+    - `lumen_palace_outer_court_ground_v001.png`
+      - 외정 광장 바닥
+    - `lumen_palace_stairway_v001.png`
+      - 북문에서 궁성으로 오르는 계단
+    - `lumen_palace_gate_v001.png`
+      - 궁성 정문
+    - `lumen_palace_banner_set_v001.png`
+      - 왕실 배너/기치 세트
+    - `lumen_palace_wall_segment_v001.png`
+      - 마을 북측 성벽과 이어지는 왕궁 전용 벽체
+    - `lumen_palace_guard_post_v001.png`
+      - 근위 초소
+  - palace_interior_assets:
+    - `lumen_palace_royal_hall_bg_v001.png`
+      - 접견실 배경
+    - `lumen_palace_throne_platform_v001.png`
+      - 왕좌 단상
+    - `lumen_palace_archive_corridor_bg_v001.png`
+      - 서고 회랑 배경
+    - `lumen_palace_guard_corridor_bg_v001.png`
+      - 근위 회랑 배경
+    - `lumen_palace_floor_tile_v001.png`
+      - 왕궁 실내 바닥 타일
+    - `lumen_palace_wall_tile_v001.png`
+      - 왕궁 실내 벽/기둥 타일
+  - palace_npc_portraits:
+    - `npc_king_aldren_dialog_v001.png`
+    - `npc_queen_regent_celestine_dialog_v001.png`
+    - `npc_captain_rowan_dialog_v001.png`
+    - `npc_archivist_mirel_dialog_v001.png`
+  - palace_runtime_npcs:
+    - `npc_king_aldren_runtime_v001.png`
+    - `npc_queen_regent_celestine_runtime_v001.png`
+    - `npc_captain_rowan_runtime_v001.png`
+    - `npc_archivist_mirel_runtime_v001.png`
+- priority:
+  - `P0`
+    - `battle_top_info_frame_v001.png`
+    - `battle_bottom_command_frame_v001.png`
+    - `result_panel_clear_v001.png`
+    - `result_panel_fail_v001.png`
+    - `lumen_palace_exterior_v001.png`
+    - `lumen_palace_gate_v001.png`
+    - `lumen_palace_royal_hall_bg_v001.png`
+  - `P1`
+    - HP 바 프레임
+    - 결과 배지
+    - 왕궁 바닥/벽/배너/계단
+    - 왕과 궁성 NPC 얼굴 초상
+  - `P2`
+    - 왕궁 런타임 NPC 전신
+    - 왕궁 회랑/서고 세부 배경
+- todo:
+  - 다음 단계에서 위 대상만 별도 프롬프트 문서로 생성
+  - 궁성 구현 순서:
+    - 외부 입구
+    - 내부 접견실
+    - 스토리 NPC
+    - 서고/회랑 확장
+- risks:
+  - 왕궁까지 한 번에 다 만들면 범위가 커진다
+  - 외부 + 접견실 + 핵심 NPC 4종을 먼저 잡는 쪽이 안전하다
+- artifacts_changed:
+  - this file only
+- handoff_to:
+  - `asset_agent`
+  - `ui_agent`
+- handoff_notes:
+  - 전투/결과 UI와 궁성은 서로 다른 배치로 제작해도 된다
+  - 먼저 `P0`만 이미지 생성해도 바로 개발 착수 가능
+- done_check:
+  - 전투/결과 업그레이드와 왕궁 확장에 필요한 이미지 목록 정리 완료

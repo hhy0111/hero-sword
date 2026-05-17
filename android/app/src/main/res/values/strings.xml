@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Hero Sword</string>
+    <string name="title_activity_main">Hero Sword</string>
+    <string name="package_name">com.appstudioon.herosword</string>
+    <string name="custom_url_scheme">com.appstudioon.herosword</string>
+    <string name="admob_app_id">ca-app-pub-4402708884038037~1307706218</string>
+</resources>

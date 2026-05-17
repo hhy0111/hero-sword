@@ -1,0 +1,56 @@
+export interface PalaceRuntimeImageAsset {
+  key: string;
+  path: string;
+}
+
+export const PALACE_RUNTIME_IMAGE_KEYS = {
+  exterior: 'palace:exterior',
+  northGate: 'palace:north-gate',
+  outerCourtGround: 'palace:outer-court-ground',
+  royalAudienceHall: 'palace:royal-audience-hall',
+  exteriorTileRuntimeSet: 'palace:exterior-tile-runtime-set',
+  interiorTileRuntimeSet: 'palace:interior-tile-runtime-set',
+  centerCarpetSegment: 'palace:center-carpet-segment',
+  thronePlatform: 'palace:throne-platform',
+  archiveCorridor: 'palace:archive-corridor',
+  npcKing: 'palace:npc-king',
+  npcQueen: 'palace:npc-queen',
+  npcGuard: 'palace:npc-guard',
+  npcScholar: 'palace:npc-scholar',
+  decorTorchBowl: 'palace:decor:torch-bowl',
+  decorWallTorch: 'palace:decor:wall-torch',
+  decorBannerBlue: 'palace:decor:banner-blue',
+  decorBannerWhite: 'palace:decor:banner-white',
+  decorBust: 'palace:decor:bust',
+  decorLectern: 'palace:decor:lectern',
+  decorBench: 'palace:decor:bench',
+  decorPlanter: 'palace:decor:planter',
+  decorLantern: 'palace:decor:lantern',
+  decorNoticeBoard: 'palace:decor:notice-board',
+} as const;
+
+export const PALACE_RUNTIME_IMAGE_ASSETS: readonly PalaceRuntimeImageAsset[] = [
+  { key: PALACE_RUNTIME_IMAGE_KEYS.exterior, path: 'assets/world/palace/exterior.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.northGate, path: 'assets/world/palace/north_gate.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.outerCourtGround, path: 'assets/world/palace/outer_court_ground.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.royalAudienceHall, path: 'assets/world/palace/royal_audience_hall.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.exteriorTileRuntimeSet, path: 'assets/world/town/palace/palace_exterior_tile_runtime_set.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.interiorTileRuntimeSet, path: 'assets/world/palace/tiles/palace_interior_tile_runtime_set.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.centerCarpetSegment, path: 'assets/world/palace/tiles/palace_center_carpet_segment.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.thronePlatform, path: 'assets/world/palace/throne_platform.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.archiveCorridor, path: 'assets/world/palace/archive_corridor.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.npcKing, path: 'assets/world/palace/npcs/king.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.npcQueen, path: 'assets/world/palace/npcs/queen.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.npcGuard, path: 'assets/world/palace/npcs/guard.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.npcScholar, path: 'assets/world/palace/npcs/scholar.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorTorchBowl, path: 'assets/world/palace/decor/torch_bowl.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorWallTorch, path: 'assets/world/palace/decor/wall_torch.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorBannerBlue, path: 'assets/world/palace/decor/banner_blue.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorBannerWhite, path: 'assets/world/palace/decor/banner_white.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorBust, path: 'assets/world/palace/decor/bust.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorLectern, path: 'assets/world/palace/decor/lectern.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorBench, path: 'assets/world/palace/decor/bench.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorPlanter, path: 'assets/world/palace/decor/planter.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorLantern, path: 'assets/world/palace/decor/lantern.png' },
+  { key: PALACE_RUNTIME_IMAGE_KEYS.decorNoticeBoard, path: 'assets/world/palace/decor/notice_board.png' },
+] as const;

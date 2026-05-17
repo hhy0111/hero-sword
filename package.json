@@ -1,0 +1,45 @@
+{
+  "name": "hero-sword",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "assets:generate": "node scripts/generate-master-atlas.mjs",
+    "assets:runtime:characters": "python scripts/generate-runtime-character-clips.py",
+    "assets:runtime:extended": "python scripts/generate-runtime-extended-clips.py",
+    "assets:runtime:effects": "python scripts/generate-runtime-effect-clips.py",
+    "assets:runtime:npcs": "python scripts/generate-runtime-npc-clips.py",
+    "audit:character-frames": "python scripts/audit-character-frame-sheets.py",
+    "audit:runtime:characters": "python scripts/audit-runtime-character-clips.py",
+    "dev": "vite",
+    "build": "vite build",
+    "build:android": "npm run assets:generate && npm run build && npx cap sync android",
+    "android:add": "npx cap add android",
+    "android:copy": "npx cap copy android",
+    "android:open": "npx cap open android",
+    "android:sync": "npx cap sync android",
+    "preview": "vite preview",
+    "capture:store": "node scripts/capture-store-screenshots.mjs",
+    "capture:viewer": "node scripts/capture-animation-viewer.mjs",
+    "test:town": "node scripts/run-town-manual-checks.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:smoke": "node scripts/run-smoke-check.mjs"
+  },
+  "dependencies": {
+    "@capacitor-community/admob": "^7.2.0",
+    "@capacitor/android": "^7.6.1",
+    "@capacitor/cli": "^7.6.1",
+    "@capacitor/core": "^7.6.1",
+    "@revenuecat/purchases-capacitor": "^11.3.2",
+    "phaser": "^3.90.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "playwright": "^1.59.1",
+    "typescript": "^6.0.2",
+    "vite": "^6.4.1",
+    "vitest": "^3.2.4"
+  }
+}

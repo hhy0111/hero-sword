@@ -1,0 +1,49 @@
+# TOWN_REWORK_IMPLEMENTATION_PLAN.md
+
+- summary:
+  - Replace the single-screen village lobby with a walkable town scene.
+  - Keep stage battle backgrounds as provisional runtime backplates.
+  - Use placeholder runtime geometry now and swap in generated pixel assets later.
+- inputs:
+  - `docs/game/TOWN_REWORK_SPEC.md`
+  - `docs/art/TOWN_REWORK_PIXEL_RUNTIME_READY_TO_COPY_PROMPTS.md`
+  - `assets/source/world/battle-backgrounds/approved/*`
+  - `assets/source/world/reference-concepts/*`
+- decisions:
+  - Use `VillageLobbyScene` as the town exploration scene instead of creating a separate hub scene key.
+  - Add `TownInteriorScene` as a generic per-shop interior scene.
+  - Keep `ShopScene` as the purchase UI and open it only after interior NPC interaction.
+  - Use placeholder geometry, tiles, and markers now so gameplay flow can be QAed before final art arrives.
+  - Keep direct menu shortcuts for party, equipment, gacha, housing, and options to avoid blocking existing loops.
+  - Split the local town stock into per-shop offer groups so each building has a distinct role before final content art arrives.
+- todo:
+  - Integrate final generated pixel town assets once delivered.
+  - Replace placeholder building shells and fountain with final art.
+  - Expand the placeholder local stock into a richer per-shop product table once real item data is ready.
+  - Add proper ambient NPC sprite sets and patrol animation once town NPC assets arrive.
+- risks:
+  - Temporary placeholder exteriors may still look more like blockouts than shipped town art.
+  - Entrance markers and NPC markers can become noisy if the final art uses brighter VFX than expected.
+  - Camera-follow towns need careful collision polish to avoid snagging at corners and counters.
+  - Headless QA can validate stateful interaction zones and scene flow, but direct synthetic `Space` input is unreliable in this Phaser environment.
+- artifacts_changed:
+  - `src/game/scenes/VillageLobbyScene.ts`
+  - `src/game/scenes/TownInteriorScene.ts`
+  - `src/game/scenes/ShopScene.ts`
+  - `src/game/data/town.ts`
+  - `src/game/data/shop.ts`
+  - `src/game/services/session.ts`
+  - `src/game/scenes/BootScene.ts`
+  - `src/game/scenes/BattleScene.ts`
+  - `src/game/ui/virtualJoystick.ts`
+  - `tests/townData.test.ts`
+  - `tests/shopOffers.test.ts`
+  - `scripts/run-town-manual-checks.mjs`
+- handoff_to:
+  - `qa_agent`
+  - `asset_agent`
+- handoff_notes:
+  - QA has already validated town collision, gate transitions, interior entry, NPC interaction, and camera follow behavior with smoke + deterministic scene-state checks.
+  - Asset work should target the prompt bundle in `docs/art/TOWN_REWORK_PIXEL_RUNTIME_READY_TO_COPY_PROMPTS.md`.
+- done_check:
+  - `true`

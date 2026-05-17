@@ -1,0 +1,80 @@
+- summary:
+  - Reviewed the latest 10-file `image` batch directly, recut the usable assets, and applied the ones that can improve palace, town perimeter, plaza, generic buttons, and battle UI without destabilizing current scenes.
+- inputs:
+  - `image/01-lumen-village-outer-wall-modular-kit-remake.png`
+  - `image/02-lumen-village-right-edge-stage-gate-remake.png`
+  - `image/03-lumen-center-plaza-tile-sheet-remake.png`
+  - `image/04-primary-ui-button-frame-sheet-remake.png`
+  - `image/05-utility-ui-button-frame-sheet-remake.png`
+  - `image/06-battle-ui-button-frame-sheet-remake.png`
+  - `image/07-battle-bottom-command-bar-frame-remake.png`
+  - `image/08-battle-result-clear-frame-remake.png`
+  - `image/09-palace-core-runtime-npc-sheet-remake.png`
+  - `image/10-optional-follow-up-palace-exterior-entry-scene.png`
+- decisions:
+  - `APPLY`: `09-palace-core-runtime-npc-sheet-remake.png`
+    - Used as the new source for `king / queen / guard / scholar` palace runtime sprites.
+    - Switched cleanup to `rembg` so the gradient background is removed instead of being baked into the runtime sprites.
+  - `APPLY`: `10-optional-follow-up-palace-exterior-entry-scene.png`
+    - Used as the current `public/assets/world/palace/exterior.png`.
+  - `APPLY`: `02-lumen-village-right-edge-stage-gate-remake.png`
+    - Used as the current `public/assets/world/town/landmarks/gate_arch.png`.
+    - Despite the filename, the front-facing gate works better than the previous arch for the current south gate presentation.
+  - `APPLY`: `01-lumen-village-outer-wall-modular-kit-remake.png`
+    - Used for `wall_segment / wall_vertical / wall_corner / wall_tower`.
+    - Cleaned with `rembg` so gradient backgrounds do not remain in-scene.
+  - `APPLY`: `03-lumen-center-plaza-tile-sheet-remake.png`
+    - Used to refresh `public/assets/world/town/tiles/outdoor/plaza_stone.png`.
+  - `APPLY`: `04-primary-ui-button-frame-sheet-remake.png`
+    - Now feeds the shared runtime button states `frame_normal / hover / pressed / disabled`.
+    - This is the button art the game actually consumes through `createButton(...)`.
+  - `APPLY`: `07-battle-bottom-command-bar-frame-remake.png`
+    - Now feeds `public/assets/ui/battle/bottom_command_frame.png`.
+  - `PREPARED_ONLY`: `08-battle-result-clear-frame-remake.png`
+    - Exported to `public/assets/ui/battle/result_clear_frame.png`.
+    - Not yet visible in the shipped result screen because `ResultScene` still uses its simplified layout instead of a full-frame image composition.
+  - `HOLD`: `05-utility-ui-button-frame-sheet-remake.png`
+    - Quality is usable, but current button system only consumes one 4-state shared set. `04` is already covering that job.
+  - `HOLD`: `06-battle-ui-button-frame-sheet-remake.png`
+    - Quality is usable, but current generic button hookup is already cleaner with `04`, and this sheet needs a separate battle-only button mapping to avoid conflicting states.
+- todo:
+  - Wire `ResultScene` to a portrait-safe runtime result frame if we want `08` to become player-visible.
+  - Decide whether the current south gate stays centered or whether stage exit moves again before doing final wall perimeter polish.
+  - If the plaza needs more variety, export additional plaza tile variants from `03`.
+- risks:
+  - `03` is now used as a single repeated plaza tile; if pattern repetition becomes obvious in wider plaza shots, we will need 2-3 alternating plaza tiles instead of one.
+  - `08` is runtime-ready but not user-facing yet.
+  - `05` and `06` are still available, but intentionally not active to avoid overwriting stable button behavior with an unreviewed mapping.
+- artifacts_changed:
+  - `scripts/import_image_batch_2026_04_19.py`
+  - `public/assets/world/palace/exterior.png`
+  - `public/assets/world/palace/npcs/king.png`
+  - `public/assets/world/palace/npcs/queen.png`
+  - `public/assets/world/palace/npcs/guard.png`
+  - `public/assets/world/palace/npcs/scholar.png`
+  - `public/assets/world/town/landmarks/gate_arch.png`
+  - `public/assets/world/town/landmarks/wall_segment.png`
+  - `public/assets/world/town/landmarks/wall_vertical.png`
+  - `public/assets/world/town/landmarks/wall_corner.png`
+  - `public/assets/world/town/landmarks/wall_tower.png`
+  - `public/assets/world/town/tiles/outdoor/plaza_stone.png`
+  - `public/assets/ui/buttons/frame_normal.png`
+  - `public/assets/ui/buttons/frame_hover.png`
+  - `public/assets/ui/buttons/frame_pressed.png`
+  - `public/assets/ui/buttons/frame_disabled.png`
+  - `public/assets/ui/battle/bottom_command_frame.png`
+  - `public/assets/ui/battle/result_clear_frame.png`
+- handoff_to:
+  - `ui_agent`
+  - `integration_agent`
+  - `qa_agent`
+- handoff_notes:
+  - Palace/town/battle assets from this batch are now materially better than the previous imports because the background cleanup switched from threshold trimming to `rembg`.
+  - `05` and `06` should stay off until we explicitly map them to a separate utility/battle button system.
+  - `08` should not be described as final-on-screen yet; it is only exported.
+- done_check:
+  - `python scripts/import_image_batch_2026_04_19.py` pass
+  - `npm run typecheck` pass
+  - `npm run build` pass
+  - `node scripts/run-town-manual-checks.mjs` pass
+  - `node scripts/capture-store-screenshots.mjs` pass

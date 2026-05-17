@@ -1,0 +1,52 @@
+# Fatigue UIUX and Ad Recovery Plan - 2026-05-16
+
+## 2026-05-17 Balance Revision
+
+- Fatigue display now uses a `100` point maximum instead of `1000`.
+- Stage entry cost is `3`.
+- Result and village rewarded fatigue buttons show `+6`.
+- Fallback recovery grants `+3`.
+- UI copy should treat rewarded ads as about 2 extra entries, not a large refill.
+
+- summary:
+  - 피로도는 스테이지 입장 자원이며, 1회 입장 시 `-3`이 소모된다.
+  - 기존 마을 메뉴 기반 노출만으로는 현재 피로도와 소모 맥락을 인지하기 어려웠다.
+  - 마을, 스테이지 선택, 전투 결과 화면에서 같은 구조로 `현재량 / 소모량 / 회복 경로`를 보여준다.
+- inputs:
+  - `FATIGUE_MAX = 100`
+  - `FATIGUE_COST_PER_STAGE = 3`
+  - `AD_REWARD_FATIGUE = 6`
+  - 광고 SDK: `@capacitor-community/admob`
+- decisions:
+  - 마을 화면: 상단 고정 피로도 바를 항상 노출한다.
+  - 스테이지 선택: 선택한 스테이지 입장 전 `현재 피로도`, `입장 후 예상 피로도`, `광고 회복량`을 함께 노출한다.
+  - 전투 결과: 결과 직후 `피로도 현재량`, `다음 전투 소모 예상`, `광고 +6 회복 버튼`을 노출한다.
+  - 피로도 회복 광고는 가챠 광고와 분리된 Rewarded Ad Unit으로 운영한다.
+- todo:
+  - 실제 Android 기기에서 피로도 회복 보상형 광고 진입, 완료, 이탈, 실패 fallback을 검증한다.
+  - 피로도 부족 팝업이 필요하면 StageSelect 실패 상태에서 별도 팝업으로 승격한다.
+- risks:
+  - 보상형 광고가 전투 결과 화면에서 너무 자주 보이면 광고 강요처럼 보일 수 있다. 최대 피로도일 때는 버튼을 흐리게 처리한다.
+  - 웹 fallback은 즉시 성공 처리되므로 실제 AdMob 완료/취소 이벤트는 단말 QA가 필요하다.
+- artifacts_changed:
+  - `src/game/scenes/VillageLobbyScene.ts`
+  - `src/game/scenes/StageSelectScene.ts`
+  - `src/game/scenes/ResultScene.ts`
+  - `src/platform/ads.ts`
+  - `src/config/runtime.ts`
+  - `tests/ads.test.ts`
+- handoff_to:
+  - `release_ops_agent`
+  - `qa_agent`
+- handoff_notes:
+  - AdMob 콘솔에는 아래 광고 단위를 추가한다.
+  - App name: `히어로소드` / `Hero Sword`
+  - Rewarded Ad Unit name: `HeroSword_Android_Rewarded_FatigueRecovery`
+  - Code placeholder: `YOUR_VALUE_HERE_REWARDED_FATIGUE_UNIT_ID`
+  - Existing gacha rewarded unit should be separated as `HeroSword_Android_Rewarded_AdTenSummon`.
+  - Banner: `HeroSword_Android_Banner_VillageBottom`
+  - Interstitial: `HeroSword_Android_Interstitial_BattleResult`
+- done_check:
+  - UI displays fatigue before and after battle.
+  - Rewarded fatigue ad has a dedicated runtime unit key.
+  - Test ad fallback still resolves to official Google rewarded test IDs while placeholders remain.

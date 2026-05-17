@@ -1,0 +1,65 @@
+- summary:
+  - 2026-04-18 추가 이미지 배치를 다시 판정한 뒤, 즉시 적용 가능한 자산은 `성벽/게이트/공용 버튼/전투 상단 HUD/전투 하단 프레임`으로 분리해 실제 런타임에 연결했다.
+  - 지금 단계는 `깨진 자산 유지`가 아니라 `깨진 자산 배제 + 쓸 수 있는 자산만 연결 + 남은 아트 블로커 정리` 상태다.
+- inputs:
+  - 사용자 스크린샷 피드백:
+    - 궁궐 북측 입구 이미지가 흰 배경처럼 떠 보임
+    - 마을 성벽이 가로/세로/코너 구조 없이 어색함
+    - 월드 루트에서 랜드마크 타워가 실제로 보이지 않음
+    - 스테이지 선택 화면이 테스트용 느낌으로 보임
+    - 전투/결과 화면이 임시 패널 느낌이 강함
+  - 신규 배치 이미지:
+    - `03-lumen-center-plaza-tile-sheet-remake.png`
+    - `04-primary-ui-button-frame-sheet-remake.png`
+    - `05-utility-ui-button-frame-sheet-remake.png`
+    - `06-battle-ui-button-frame-sheet-remake.png`
+    - `07-battle-bottom-command-bar-frame-remake.png`
+    - `09-palace-core-runtime-npc-sheet-remake.png`
+    - 기타 기존 보류 자산
+- decisions:
+  - `PATCH`: 공용 버튼 시스템
+    - 이유: `06-battle-ui-button-frame-sheet-remake.png`는 실제로 빈 버튼 프레임 시트라 공용 버튼 위젯에 바로 연결 가능했다.
+  - `PATCH`: 마을 성벽/오른쪽 게이트
+    - 이유: `03-lumen-center-plaza-tile-sheet-remake.png`는 실제로 광장 바닥이 아니라 성벽 모듈 세트였고, `05-utility-ui-button-frame-sheet-remake.png`는 오른쪽 스테이지 게이트로 바로 쓸 수 있었다.
+  - `PATCH`: 궁궐 북측 게이트
+    - 이유: `04-primary-ui-button-frame-sheet-remake.png`는 버튼 시트가 아니라 궁궐 입구용 게이트 자산으로 판단됐다.
+  - `PATCH`: 월드맵 랜드마크 표시
+    - 이유: 랜드마크 썸네일은 이미 준비되어 있었지만 UI에서 숨겨져 있어서 실제 개선 체감이 없었다.
+  - `PATCH`: 전투/결과 UI의 임시 자산 사용 정책
+    - 이유: 현재 상단 HUD와 결과 프레임은 이미지가 오히려 완성도를 떨어뜨리는 경우가 있어, 최종 아트 전까지는 코드형 패널 우선이 더 안전하다.
+  - `ADD_NEW`: 궁궐/스테이지 선택/전투/결과 최종 아트 요청 문서
+    - 이유: 지금부터는 어떤 자산이 꼭 필요한지 범위를 좁혀서 다시 만들어야 한다.
+- todo:
+  - 궁궐 북측 입구용 최종 외부 랜드마크 이미지 교체
+  - 궁궐 접견실 최종 배경 이미지 교체
+  - 광장 방향 표지판 최종 이미지 교체
+  - 스테이지 선택 전용 배경/헤더 프레임/카드 프레임 교체
+  - 전투 상단 HUD / 전투 하단 커맨드 / 결과 클리어 / 결과 실패 최종 프레임 교체
+  - 왕궁 전용 런타임 NPC 시트 교체
+- risks:
+  - 현재 성벽은 구조는 좋아졌지만 `완성형 성벽 세트`가 아니라 모듈 반복 배치라서 최종 감도는 아직 부족하다.
+  - 전투/결과는 레이아웃 정리는 가능하지만 최종 프레임 아트 없이는 `상용 게임 화면` 수준까지 올라가지 않는다.
+  - 궁궐 입구는 지금 배경 깨짐은 줄였지만, 여전히 왕궁 전용 외관으로서의 존재감은 부족하다.
+- artifacts_changed:
+  - `src/game/data/uiButtonRuntimeArt.ts`
+  - `src/game/data/townRuntimeArt.ts`
+  - `src/game/scenes/BootScene.ts`
+  - `src/game/ui/widgets.ts`
+  - `src/game/scenes/VillageLobbyScene.ts`
+  - `src/game/scenes/WorldMapScene.ts`
+  - `src/game/scenes/StageSelectScene.ts`
+  - `src/game/scenes/BattleScene.ts`
+  - `src/game/scenes/ResultScene.ts`
+  - `scripts/import_image_batch_2026_04_18_followup.py`
+- handoff_to:
+  - `asset_agent`
+  - `ui_agent`
+  - `qa_agent`
+- handoff_notes:
+  - 버튼 프레임은 이미 전체 게임에 공용 적용되므로 다음 이미지 배치에서는 `텍스트가 박힌 버튼`이 아니라 `빈 프레임`만 유지하면 된다.
+  - 궁궐/전투/결과는 현재 `코드형 임시 정리` 상태다. 새 이미지가 들어오면 코드 구조를 갈아엎을 필요 없이 파일만 교체하면 된다.
+  - 월드 루트는 랜드마크 썸네일 표시까지는 반영됐다. 다음 목표는 배경과 카드 프레임의 최종 교체다.
+- done_check:
+  - 적용 가능한 이미지와 적용 불가능한 이미지를 다시 분리했다.
+  - 지금 화면에서 가장 지저분한 부분이던 버튼, 성벽, 게이트, 월드맵 랜드마크는 최소 개선이 반영됐다.
+  - 새로 만들어야 하는 최종 이미지 종류를 다음 프롬프트 배치로 넘길 수 있는 상태다.

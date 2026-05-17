@@ -1,0 +1,44 @@
+- summary:
+  - Rechecked the concrete issues from the latest screenshots: child dialogue portrait mismatch, palace dialogue portrait mismatch, world-map return trap, gacha bottom-button overflow.
+- inputs:
+  - User screenshots captured on `2026-04-22`
+  - Runtime scenes:
+    - `village`
+    - `palace`
+    - `gacha`
+    - `result`
+- decisions:
+  - Child and palace dialogue should stop using mismatched portrait PNGs when runtime sprite identity is more reliable.
+  - Palace dialogue should resolve to palace-specific runtime art, not generic town guard/traveler clips.
+  - World-map return spawn should land on the center road, not the gate choke point.
+  - Runtime button labels need smaller typography when image button frames are active.
+  - Gacha screen should prioritize stable fitting over decorative density.
+- todo:
+  - Revisit `result` once a final vertical result frame exists.
+  - Revisit `gacha` if a final dedicated gacha frame/background set is produced.
+- risks:
+  - Palace dialogue still uses runtime dot sprites, not final portrait art.
+  - Gacha layout is now usable but still visually plain compared with the rest of the UI.
+- artifacts_changed:
+  - `src/game/ui/dialogueOverlay.ts`
+  - `src/game/data/town.ts`
+  - `src/game/ui/widgets.ts`
+  - `src/game/scenes/GachaScene.ts`
+  - `output/manual-verify-2026-04-22-ui-pass2/village-child-dialogue.png`
+  - `output/manual-verify-2026-04-22-ui-pass2/palace-king-dialogue.png`
+  - `output/manual-verify-2026-04-22-ui-pass2/palace-rowan-dialogue.png`
+  - `output/manual-verify-2026-04-22-ui-pass2/village-return.png`
+  - `output/manual-verify-2026-04-22-ui-pass4/gacha.png`
+- handoff_to:
+  - next_ui_polish
+- handoff_notes:
+  - Child portrait mismatch is resolved by forcing runtime child art.
+  - Palace portrait mismatch is resolved by forcing palace runtime art.
+  - Village return spawn now uses `world_gate_return = (624, 620)`.
+  - Button label overflow was reduced globally for runtime image buttons.
+- done_check:
+  - `village child dialogue`: pass
+  - `palace king dialogue`: pass
+  - `palace rowan dialogue`: pass
+  - `world map return to village`: pass
+  - `gacha bottom buttons fully visible`: pass

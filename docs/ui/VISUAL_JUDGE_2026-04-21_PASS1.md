@@ -1,0 +1,61 @@
+- summary:
+  - Resumed from the interrupted visual cleanup pass and revalidated the actual current build with direct scene captures.
+  - Confirmed that the reported `child_south` / palace portrait issues were source-art problems, then kept the runtime-portrait fallback as the current stable path.
+  - Confirmed that the result screen no longer needs clear-time text and now uses star icons instead.
+  - Confirmed that the world-map return spawn is no longer trapping the player near the south gate.
+  - Reworked `GachaScene` again because the layout was still visibly broken even after the previous pass.
+- inputs:
+  - `output/manual-verify-2026-04-21-pass1/village-child-dialogue.png`
+  - `output/manual-verify-2026-04-21-pass1/palace-rowan-dialogue.png`
+  - `output/manual-verify-2026-04-21-pass1/result-clear.png`
+  - `output/manual-verify-2026-04-21-pass1/village-return.png`
+  - `output/manual-verify-2026-04-21-pass3/gacha.png`
+  - `output/manual-verify-2026-04-21-pass4/gacha.png`
+  - `output/manual-verify-2026-04-21-pass5/gacha.png`
+- decisions:
+  - `Village child dialogue`
+    - Current fix is acceptable without new art.
+    - The wrong adult portrait PNG is bypassed; runtime child sprite is now used instead.
+  - `Palace dialogue portraits`
+    - Current fix is acceptable without new art.
+    - Broken checkerboard portrait PNGs are bypassed; runtime palace/NPC sprites are used instead.
+  - `Result screen`
+    - `clear time` stays removed.
+    - Star count should stay as image icons, not text rows.
+    - Current result layout is usable and no longer visually broken.
+  - `World gate return`
+    - Current spawn is safe.
+    - No additional map-image work is required for this bug.
+  - `GachaScene`
+    - Main issue is layout composition, not missing art.
+    - Current pass removed the worst footer overlap and panel-title duplication.
+    - This screen is now `usable but still rough`, not `visually broken`.
+- todo:
+  - One more code-only polish pass on `GachaScene`.
+  - Replace the broken NPC portrait PNGs later with proper face portraits if final narrative presentation needs it.
+- risks:
+  - `GachaScene` still reads as rough compared with the rest of the flow.
+  - The current child/palace dialogue fix is a runtime fallback, not final portrait art.
+- artifacts_changed:
+  - `src/game/ui/dialogueOverlay.ts`
+  - `src/game/scenes/ResultScene.ts`
+  - `src/game/data/town.ts`
+  - `src/game/scenes/TownInteriorScene.ts`
+  - `src/game/scenes/GachaScene.ts`
+  - `output/manual-verify-2026-04-21-pass1/*`
+  - `output/manual-verify-2026-04-21-pass3/gacha.png`
+  - `output/manual-verify-2026-04-21-pass4/gacha.png`
+  - `output/manual-verify-2026-04-21-pass5/gacha.png`
+- handoff_to:
+  - `ui_agent`
+  - `qa_agent`
+- handoff_notes:
+  - Do not spend new art on the child/palace portrait problem first; the runtime fallback is already stable enough.
+  - The next clean-up target is `GachaScene`.
+- done_check:
+  - Direct scene captures reopened
+  - Runtime portrait fallback visually verified
+  - Result screen visually verified
+  - South-gate return visually verified
+  - Gacha scene retested after layout rewrite
+  - Gacha footer overlap reduced and revalidated

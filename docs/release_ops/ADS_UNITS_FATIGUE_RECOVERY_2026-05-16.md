@@ -1,0 +1,38 @@
+# Ads Units - Fatigue Recovery - 2026-05-16
+
+- summary:
+  - 피로도 회복 광고를 가챠 광고와 분리된 보상형 광고 단위로 운영한다.
+  - 2026-05-16 사용자가 제공한 AdMob 실값을 게임 런타임과 Android 리소스에 적용했다.
+- inputs:
+  - App name: `히어로소드` / `Hero Sword`
+  - Platform: `Android`
+  - SDK: `@capacitor-community/admob`
+- decisions:
+  - `Rewarded Fatigue`와 `Rewarded Gacha`를 분리해서 보상 성과와 이탈률을 따로 본다.
+  - 개발/테스트 모드에서는 실값이 설정되어 있어도 Google 공식 테스트 Unit ID로 치환한다.
+- todo:
+  - 실제 Android 단말에서 실광고 로딩, 보상 지급, 취소 이탈을 확인한다.
+- risks:
+  - 실제 광고 로딩은 AdMob 승인/앱 상태/테스트 기기 설정에 영향을 받으므로 단말 QA가 필요하다.
+  - 로컬 기본 `JAVA_HOME`이 JDK 17이면 Android 빌드가 `invalid source release: 21`로 실패한다.
+- artifacts_changed:
+  - `src/config/runtime.ts`
+  - `src/platform/ads.ts`
+  - `tests/ads.test.ts`
+  - `android/app/src/main/res/values/strings.xml`
+- handoff_to:
+  - `release_ops_agent`
+  - `qa_agent`
+- handoff_notes:
+  - App ID: `ca-app-pub-4402708884038037~1307706218`
+  - Banner: `HeroSword_Android_Banner_VillageBottom` -> `ca-app-pub-4402708884038037/9732991146`
+  - Interstitial: `HeroSword_Android_Interstitial_BattleResult` -> `ca-app-pub-4402708884038037/8162705869`
+  - Rewarded Gacha: `HeroSword_Android_Rewarded_AdTenSummon` -> `ca-app-pub-4402708884038037/7909378821`
+  - Rewarded Fatigue Recovery: `HeroSword_Android_Rewarded_FatigueRecovery` -> `ca-app-pub-4402708884038037/1122654798`
+  - Reserved Rewarded Slot: `HeroSword_Android_Rewarded_Fatigue_Ad10Summon` -> `ca-app-pub-4402708884038037/4329455374`
+  - Reserved slot is registered in config as `rewardedFatigueAdTenSummon`; no current button calls this slot.
+- done_check:
+  - Test ads still use official Google test unit IDs when test mode is on.
+  - Release-mode web build contains the provided live Unit IDs.
+  - Android `strings.xml` contains the provided AdMob App ID.
+  - `assembleDebug` passes when `JAVA_HOME` points to JDK 21.

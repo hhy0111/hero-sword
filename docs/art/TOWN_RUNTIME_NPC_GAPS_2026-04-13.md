@@ -1,0 +1,25 @@
+- summary:
+  - Town interior merchants now prefer runtime NPC clips.
+  - Two interiors still lack dedicated merchant subjects and currently use a temporary fallback subject.
+- inputs:
+  - `public/assets/runtime/animation-manifest.json`
+  - `src/game/scenes/TownInteriorScene.ts`
+- decisions:
+  - `weapon_shop` uses `weapon_merchant`
+  - `item_shop` uses `item_merchant`
+  - `relic_shop` uses `relic_merchant`
+  - `armor_shop` temporarily uses `weapon_merchant`
+  - `forge_shop` temporarily uses `weapon_merchant`
+- todo:
+  - add a dedicated `armor_merchant` runtime NPC subject
+  - add a dedicated `master_blacksmith` runtime NPC subject
+- risks:
+  - `armor_shop` and `forge_shop` merchant visuals are serviceable but not final because they reuse the wrong subject
+- artifacts_changed:
+  - `src/game/scenes/TownInteriorScene.ts`
+- handoff_to:
+  - `asset_agent`
+- handoff_notes:
+  - Replace the two temporary fallbacks once dedicated runtime NPC sheets are approved and generated.
+- done_check:
+  - Dedicated runtime gap list recorded for town interiors

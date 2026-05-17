@@ -1,0 +1,88 @@
+# DIALOGUE_PORTRAIT_DOT_MATCH_AUDIT_2026-04-16.md
+
+- summary:
+  - 현재 대화용 얼굴 초상 42장을 다시 열어보고, 런타임 도트 캐릭터 정체성과 맞는지 수동 판정했다.
+  - 이번 판정 기준은 `얼굴 퀄리티`가 아니라 `도트 캐릭터와 같은 사람으로 보이는가`이다.
+  - 결과적으로 여러 초상이 도트 캐릭터의 성별, 나이, 직업, 분위기와 맞지 않았다.
+- inputs:
+  - [dialogue-portrait-labeled-review.png](D:/dev/game307/output/dialogue-portrait-labeled-review.png)
+  - [DIALOGUE_FACE_READY_TO_COPY_PROMPTS.md](D:/dev/game307/docs/art/DIALOGUE_FACE_READY_TO_COPY_PROMPTS.md)
+  - [town.ts](D:/dev/game307/src/game/data/town.ts)
+  - [dialoguePortraitAssets.ts](D:/dev/game307/src/game/data/dialoguePortraitAssets.ts)
+- decisions:
+  - `REMAKE_NOW`
+    - `hero`
+      - 이유: 너무 어려 보이고 검/갑옷 주인공 정체성이 약함
+    - `sera`
+      - 이유: 메이지보다 기사형 인상에 가까워 도트 클래스 정체성이 흐림
+    - `theo`
+      - 이유: 남성 정찰 궁수가 아니라 성역계 여성 기사처럼 보임
+    - `dorgan`
+      - 이유: 얼굴 정보가 흐리고 대장장이 전사 정체성이 거의 안 보임
+    - `kiera`
+      - 이유: 여성 엔지니어 거너가 아니라 거친 남성 병사처럼 보임
+    - `helma`
+      - 이유: 50대 룬 장인이 아니라 젊은 모험가처럼 보임
+    - `marin`
+      - 이유: 여성 창전사보다 남성 모험가 느낌이 강함
+    - `fin`
+      - 이유: 기동 사수보다 성직 계열 이미지에 가까움
+    - `iris`
+      - 이유: 여성 기사보다 소년 레인저 느낌이 강함
+    - `nazir`
+      - 이유: 얼굴이 너무 흐리고 반투명해 정체성 판정이 어려움
+    - `laila`
+      - 이유: 유물 학자 메이지보다 사막 도적 계열처럼 보임
+    - `hakan`
+      - 이유: 남성 창수호자가 아니라 여성 후드 캐릭터처럼 보임
+    - `seraphin`
+      - 이유: 팔라딘보다 희미한 성녀 이미지에 가까움
+    - `micaela`
+      - 이유: 여성 찬가 캐스터가 아니라 사막 남성 전사처럼 보임
+    - `lucian`
+      - 이유: 남성 암살자가 아니라 금발 성녀처럼 보임
+    - `orin`
+      - 이유: 무기 상인이 아니라 후드 암살자/로그처럼 보임
+    - `neri`
+      - 이유: 상점 보급 담당보다 정체성 없는 흐린 초상에 가까움
+    - `runner_lane`
+      - 이유: 빠른 전령이 아니라 나이 많은 주민처럼 보임
+    - `child_south`
+      - 이유: 어린 주민이 아니라 성인/사막 전사처럼 보임
+    - `blacksmith`
+      - 이유: 대장장이가 아니라 로브 마법사처럼 보임
+  - `REMAKE_RECOMMENDED`
+    - `ria`
+      - 이유: 전장형 힐러보다 정적인 성녀 쪽으로 치우침
+    - `marta`
+      - 이유: 방어구 상인 정체성이 약하고 얼굴 인상이 도트 상인과 거리감 있음
+    - `armor_merchant`
+      - 이유: 임시 상인 얼굴이 흐리고 방어구 상인 분화가 약함
+  - `KEEP_FOR_NOW`
+    - `bram`
+    - `luna`
+    - `wolf`
+    - `erin`
+    - `serena`
+    - `torren`
+    - `seline`
+    - `guard_east`
+    - `villager_plaza`
+    - `weapon_merchant`
+    - `item_merchant`
+    - `relic_merchant`
+    - 적/보스 초상 7종
+- todo:
+  - 위 `REMAKE_NOW` 대상부터 얼굴 초상 재생성
+  - `REMAKE_RECOMMENDED` 대상은 2차 배치에서 재정비
+- risks:
+  - 현재 대화 초상은 얼굴 화질 자체보다 `다른 사람처럼 보이는 문제`가 더 크다
+  - 특히 직업/성별/나이 오판이 있는 대상은 그대로 쓰면 스토리 대사 몰입이 깨진다
+- artifacts_changed:
+  - this file only
+- handoff_to:
+  - `asset_agent`
+- handoff_notes:
+  - 재생성 프롬프트는 별도 문서 [DIALOGUE_PORTRAIT_REMAKE_READY_TO_COPY_PROMPTS_2026-04-16.md](D:/dev/game307/docs/art/DIALOGUE_PORTRAIT_REMAKE_READY_TO_COPY_PROMPTS_2026-04-16.md)에 정리
+- done_check:
+  - 현재 대화 초상과 도트 캐릭터 정체성 불일치 대상 분류 완료

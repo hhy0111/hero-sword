@@ -1,0 +1,55 @@
+- summary:
+  - `image` 신규 배치를 직접 열어 판정했고, 궁궐 런타임 NPC/궁궐 배경/남쪽 성벽 세트/상점 UI 프레임을 실제 게임에 반영했다.
+- inputs:
+  - `image/01-lumen-village-south-gate-outer-wall-modular-tile-set.png`
+  - `image/02-lumen-shop-ui-frame-set.png`
+  - `image/03-lumen-palace-core-runtime-npc-sheet-remake.png`
+  - `image/03-palace-audience-hall-final-background.png`
+  - `image/04-result-clear-screen-final-frame.png`
+  - `image/05-optional-result-fail-screen-matching-frame.png`
+  - `image/06-optional-stage-select-scenic-background-final-polish.png`
+  - `image/09-palace-core-runtime-npc-sheet-remake.png`
+- decisions:
+  - `PASS/APPLIED`
+    - `01-lumen-village-south-gate-outer-wall-modular-tile-set.png`
+      - `gate_arch`, `wall_segment`, `wall_vertical`, `wall_corner`, `wall_tower`로 재추출 후 마을 남쪽 성벽/게이트에 반영.
+    - `02-lumen-shop-ui-frame-set.png`
+      - 상점 상단/목록/하단 프레임으로 추출 후 [ShopScene.ts](D:/dev/game307/src/game/scenes/ShopScene.ts)에 반영.
+    - `03-palace-audience-hall-final-background.png`
+      - 궁궐 접견실 최종 배경으로 교체.
+    - `03-lumen-palace-core-runtime-npc-sheet-remake.png`
+      - 왕/왕비/근위/학자 단일 캐릭터 tight crop 후 궁궐 런타임 NPC로 반영.
+  - `HOLD`
+    - `04-result-clear-screen-final-frame.png`
+      - 품질은 usable 범주지만 영어 `CLEAR!` 고정 텍스트와 불투명 배경이 남아 현재 결과 화면 레이아웃과 충돌.
+    - `05-optional-result-fail-screen-matching-frame.png`
+      - 위와 동일.
+    - `06-optional-stage-select-scenic-background-final-polish.png`
+      - 완성도는 높지만 현재 월드맵/스테이지 선택에서 대륙 가독성을 낮출 가능성이 있어 이번 턴 적용 보류.
+    - `09-palace-core-runtime-npc-sheet-remake.png`
+      - 파일명과 달리 NPC 시트가 아니라 전투 하단 커맨드 프레임 계열 이미지로 판정. 궁궐 NPC 용도에는 미사용.
+- todo:
+  - 결과 화면용 프레임은 `텍스트 비내장` 또는 `투명 배경` 기준 새 버전이 필요하다.
+  - 월드/스테이지 배경은 현재 구조를 먼저 정리한 뒤, `06-optional-stage-select-scenic-background-final-polish.png` 재평가.
+- risks:
+  - 남쪽 게이트는 새 모듈 세트로 개선됐지만, 최종 성벽 배치는 씬 레이아웃 추가 조정이 더 필요할 수 있다.
+  - 궁궐 NPC 스프라이트는 전용 이미지 우선으로 바꿨지만, 상단 배치 위치는 추가 폴리시 여지가 있다.
+- artifacts_changed:
+  - [import_image_batch_2026_04_19.py](D:/dev/game307/scripts/import_image_batch_2026_04_19.py)
+  - [townRuntimeArt.ts](D:/dev/game307/src/game/data/townRuntimeArt.ts)
+  - [PalaceScene.ts](D:/dev/game307/src/game/scenes/PalaceScene.ts)
+  - [ShopScene.ts](D:/dev/game307/src/game/scenes/ShopScene.ts)
+  - `public/assets/world/palace/*`
+  - `public/assets/world/town/landmarks/*`
+  - `public/assets/world/town/ui/*`
+- handoff_to:
+  - `asset_agent`
+  - `ui_agent`
+- handoff_notes:
+  - 궁궐 NPC는 이제 generic town runtime clip보다 palace 전용 이미지가 우선한다.
+  - 결과 프레임은 파일 자체보다 `UI 구조와 언어 내장 문제`가 블로커다.
+- done_check:
+  - [x] 신규 배치 직접 판정
+  - [x] 적용 가능한 이미지 실제 게임 반영
+  - [x] 왕/왕비/근위/학자 런타임 사용 확인
+  - [x] 보류 항목과 이유 문서화

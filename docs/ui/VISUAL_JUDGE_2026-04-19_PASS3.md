@@ -1,0 +1,68 @@
+- summary:
+  - Performed a fresh visual QA pass against the current build using the latest generated screenshots.
+  - The build is broadly functional, but several screens still fail a player-facing quality bar.
+- inputs:
+  - `output/town-dev-preview/manual-checks/village-overview.png`
+  - `output/town-dev-preview/manual-checks/shop-flow.png`
+  - `output/town-dev-preview/manual-checks/palace-flow.png`
+  - `output/store-screenshots/store_01_village.png`
+  - `output/store-screenshots/store_02_world_map.png`
+  - `output/store-screenshots/store_03_stage_select.png`
+  - `output/store-screenshots/store_04_party.png`
+  - `output/store-screenshots/store_05_equipment.png`
+  - `output/store-screenshots/store_06_battle_field.png`
+  - `output/manual-ui-pass-2026-04-19/result.png`
+- decisions:
+  - `FAIL / CRITICAL`: `PartyScene`
+    - Panels overlap each other.
+    - Text overflows outside the intended panel regions.
+    - The bottom action bar collides with scene content and the lower edge.
+    - Reference: `output/store-screenshots/store_04_party.png`
+  - `FAIL / CRITICAL`: `EquipmentScene`
+    - Character summary, equipment columns, and footer controls fight for the same space.
+    - Labels and frame structure do not align cleanly.
+    - Reference: `output/store-screenshots/store_05_equipment.png`
+  - `FAIL / HIGH`: `PalaceScene`
+    - Palace NPC sprites are cleaner now, but they sit too high and clip into the top overlay area.
+    - The room composition still reads as layered assets rather than a settled scene.
+    - Reference: `output/town-dev-preview/manual-checks/palace-flow.png`
+  - `FAIL / HIGH`: `BattleScene`
+    - Units cluster too far to the right and overlap each other.
+    - Labels and combat log still collide with nearby UI.
+    - Reference: `output/store-screenshots/store_06_battle_field.png`
+  - `FAIL / HIGH`: `Village gate perimeter`
+    - Gate and wall assets are cleaner than before, but the south perimeter still reads as unfinished composition rather than a finished town boundary.
+    - Reference: `output/store-screenshots/store_01_village.png`
+  - `PASS WITH CAUTION`: `WorldMapScene`
+    - No obvious breakage remains.
+    - Main remaining issue is polish, not correctness.
+    - Reference: `output/store-screenshots/store_02_world_map.png`
+  - `PASS WITH CAUTION`: `StageSelectScene`
+    - Significantly cleaner than previous passes.
+    - Top summary remains text-dense, but the screen is no longer visually broken.
+    - Reference: `output/store-screenshots/store_03_stage_select.png`
+  - `PASS WITH CAUTION`: `ResultScene`
+    - Readable and functional.
+    - Still needs a stronger final visual hierarchy, but no major breakage remains.
+    - Reference: `output/manual-ui-pass-2026-04-19/result.png`
+- todo:
+  - Rebuild `PartyScene` layout around fixed vertical regions.
+  - Rebuild `EquipmentScene` header / list / footer layout.
+  - Lower palace NPC anchors and widen palace staging.
+  - Spread combatants across the battle field and re-anchor labels / log.
+  - Recompose the south gate perimeter with fewer, larger structural beats.
+- risks:
+  - `PartyScene` and `EquipmentScene` still fail a presentable-store-demo standard.
+  - `BattleScene` can make the combat system feel unstable even if the logic works.
+- artifacts_changed:
+  - `docs/ui/VISUAL_JUDGE_2026-04-19_PASS3.md`
+- handoff_to:
+  - `ui_agent`
+  - `integration_agent`
+  - `qa_agent`
+- handoff_notes:
+  - Highest ROI next pass is `PartyScene` + `EquipmentScene`, then `BattleScene`, then `PalaceScene`.
+  - `WorldMapScene`, `StageSelectScene`, and `ResultScene` should not be the first targets.
+- done_check:
+  - Latest screenshots opened and visually inspected
+  - Issues classified by severity

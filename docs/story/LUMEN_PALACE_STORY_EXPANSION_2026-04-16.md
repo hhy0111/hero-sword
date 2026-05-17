@@ -1,0 +1,95 @@
+# LUMEN_PALACE_STORY_EXPANSION_2026-04-16.md
+
+- summary:
+  - Lumen Village 북쪽 상단에 `루멘 궁성`을 추가한다.
+  - 이 공간은 단순 배경이 아니라 `왕궁 외부`, `왕궁 내부`, `왕의 접견실`, `서고`, `근위 회랑`까지 이어지는 스토리 허브로 쓴다.
+  - 궁성은 마을보다 한 단계 높은 질서와 긴장감을 보여주는 공간이어야 한다.
+- inputs:
+  - [STORY_MASTER.md](D:/dev/game307/docs/story/STORY_MASTER.md)
+  - [TOWNS_AND_SETTLEMENTS.md](D:/dev/game307/docs/story/TOWNS_AND_SETTLEMENTS.md)
+  - [WORLD_STRUCTURE.md](D:/dev/game307/docs/story/WORLD_STRUCTURE.md)
+- decisions:
+  - 궁성 이름:
+    - `루멘 궁성`
+  - 위치:
+    - 현 마을 맵 상단 북쪽 확장 구역
+  - 역할:
+    - 초반 스토리 보고 지점
+    - 왕실 명령과 지역 정세를 전달하는 정치 허브
+    - 동료 합류와 스테이지 개방 명분을 강화하는 장소
+    - 후반에는 `왕의 불안`, `근위대의 긴장`, `성역의 균열 정보`가 드러나는 장소
+- palace_structure:
+  - `outer_court`
+    - 궁성 앞 광장
+    - 근위병, 전령, 방문자 대기
+  - `royal_hall`
+    - 왕과 주요 보고가 이뤄지는 접견실
+    - 대형 홀, 왕좌, 신하 배치
+  - `archive_corridor`
+    - 왕실 기록과 봉인 문서 보관 구역
+    - Erin, Helma 계열 스토리와 연결 가능
+  - `guard_passage`
+    - 근위 회랑
+    - 경비 강화, 특정 챕터에서 출입 제한 연출 가능
+  - `private_chamber_access`
+    - 후반부에만 열리는 왕의 사적 공간 입구
+    - 초반엔 배경 정보만 제공
+- story_usage:
+  - 프롤로그 이후:
+    - 카인이 첫 조각의 보고를 올리는 장소
+    - 왕은 조각을 회수하라고만 하지 않고, 각 지역 세력과의 균형을 고려한 명령을 내린다
+  - 2대륙 진입 전:
+    - 단순한 마을 위협이 아니라 국가 단위 문제라는 점을 왕궁에서 명확히 보여준다
+  - 4대륙 이후:
+    - 왕실 내부에도 `균열을 봉인해야 하는가`, `조각을 무기로 삼아야 하는가` 갈등이 생긴다
+  - 6대륙 직전:
+    - 루멘 궁성은 정치/신앙/군사 세력의 충돌이 한 번에 드러나는 장소가 된다
+- key_npcs:
+  - `King Aldren`
+    - 전쟁을 겪은 실용 군주
+    - 조각의 위험을 알지만 민심과 국방도 버릴 수 없음
+  - `Queen Regent Celestine`
+    - 성역 질서와 왕실 연속성을 중시
+    - 루나, 세라핀 계열 신앙 갈등과 연결 가능
+  - `Captain Rowan`
+    - 왕궁 근위대장
+    - 브람, 아이리스, 하칸 계열 전투 인물과 접점
+  - `Archivist Mirel`
+    - 왕실 서고 관리자
+    - 에린, 라일라, 헬마 라인의 기록/조각 해석 연결점
+- sample_story_beats:
+  - `beat_01_first_audience`
+    - 첫 조각 회수 직후 왕궁 보고
+    - 왕은 즉시 봉인을 명령하지만, 동시에 더 깊은 진실을 감추고 있음이 드러남
+  - `beat_02_royal_warning`
+    - 2대륙 이후 왕궁은 각 지역 세력의 동요를 경고
+  - `beat_03_archive_unlock`
+    - 일정 스테이지 클리어 후 왕실 서고 출입 허용
+    - 조각의 과거 기록 열람 가능
+  - `beat_04_guard_crackdown`
+    - 후반부 왕궁 출입 통제
+    - 특정 동료와의 신뢰도/스토리 분기 가능
+  - `beat_05_final_decree`
+    - 최종 진입 전 왕의 칙명
+    - 플레이어의 사명과 세계 질서가 정면으로 겹침
+- map_integration_notes:
+  - 현재 마을 상단 성벽 뒤쪽 공간을 넓혀 궁성 전용 진입로를 만든다
+  - `북문 계단 -> 외정 광장 -> 왕궁 입구 -> 실내 홀` 흐름으로 연결
+  - 스토리 진행도에 따라 일부 구역은 잠금/개방 연출
+- todo:
+  - 왕궁 스토리 전용 NPC 대사 시트 추가
+  - 왕궁 진입 조건과 스테이지 진행 연동 정의
+  - 왕궁 실내 씬 분리 여부 결정
+- risks:
+  - 왕궁을 너무 일찍 크게 열면 마을보다 스케일이 앞서서 초반 허브 중심이 무너질 수 있다
+  - 왕궁은 `사용 빈도는 낮지만 존재감은 높아야 하는 공간`으로 관리해야 한다
+- artifacts_changed:
+  - this file only
+- handoff_to:
+  - `planner_agent`
+  - `ui_agent`
+  - `asset_agent`
+- handoff_notes:
+  - 구현은 마을 북쪽 확장 + 왕궁 외부/내부 2단계로 쪼개는 것이 안전하다
+- done_check:
+  - 마을 상단 궁성 확장 방향과 스토리 사용처 정리 완료

@@ -1,0 +1,40 @@
+- summary:
+  - `hero` 런타임 스트립에 남아 있던 밝은 경계 잔재와 흐린 외곽선을 줄이는 hero 전용 후처리 패스를 추가했다.
+  - 이번 패스의 목표는 `잘못 남은 테두리/잔재 정리`였고, `동작별 스케일 흔들림 완전 해결`은 별도 후속 과제로 분리했다.
+- inputs:
+  - 사용자 요청: 주인공 현재 정리 상태에서 삐져나오거나 투명처리 안 된 부분을 보고 정리하고, 테두리를 조금 더 진하게 만들어 캐릭터를 더 뚜렷하게 만들기
+  - 기준 자산:
+    - `public/assets/runtime/characters/hero/*.png`
+    - `output/qa/character-frame-review/hero/*`
+    - `scripts/generate-runtime-character-clips.py`
+- decisions:
+  - hero 전용 최종 스트립 후처리를 추가했다.
+  - 밝은/중성 경계 잔재는 작은 컴포넌트만 제거하고, 큰 경계선은 삭제 대신 어둡게 눌러서 외곽선을 선명하게 만들었다.
+  - `down_or_death`는 너무 작게 보이던 문제를 줄이기 위해 허용 최대 스케일을 올렸다.
+  - 현재 남은 자동 경고는 `잔재`보다 `scale_jitter`, `anchor_jitter` 성격이 강하므로 다음 패스는 프레임 재앵커/리샘플 기준을 따로 건드리는 것이 맞다.
+- todo:
+  - `attack_basic_02` 스케일 흔들림 축소
+  - `attack_basic_03` 중심 흔들림 축소
+  - `dash_or_dodge` 폭/중심 흔들림 축소
+  - `down_or_death` 앵커 재설계 또는 원본 재재단 검토
+- risks:
+  - 외곽선 강화는 안전하게 보수적으로만 넣었기 때문에, 아주 강한 윤곽선 보정까지는 아니다.
+  - `down_or_death`는 잔재 정리 후에도 자세 자체가 작고 눕는 프레임이라 자동 QA상 여전히 `caution`이다.
+- artifacts_changed:
+  - `scripts/generate-runtime-character-clips.py`
+  - `output/qa/runtime-character-quality-report.json`
+  - `output/qa/character-frame-review/hero/*`
+  - `output/manual-verify-2026-04-21-hero-pass1/*`
+  - `output/manual-verify-2026-04-21-hero-pass2/*`
+- handoff_to:
+  - 다음 hero 애니메이션 정리 패스
+- handoff_notes:
+  - 이번 패스로 hero의 밝은 경계 잔재 수치는 크게 줄었다.
+  - 다음은 `잔재 제거`가 아니라 `프레임별 스케일/중심`을 조정하는 패스여야 한다.
+  - `down_or_death`는 현재도 가장 약한 clip이므로 필요하면 원본 기준 재재단을 우선 검토한다.
+- done_check:
+  - `npm run typecheck`
+  - `python scripts/generate-runtime-character-clips.py`
+  - `python scripts/audit-runtime-character-clips.py --subject hero`
+  - `python scripts/export-character-frame-review.py --subject hero`
+  - hero 전용 뷰어 캡처 생성

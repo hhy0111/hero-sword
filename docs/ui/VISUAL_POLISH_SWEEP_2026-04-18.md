@@ -1,0 +1,46 @@
+- summary:
+- 2026-04-18 시각 정리 패스에서 마을, 궁궐, 월드맵, 전투, 결과 화면의 즉시 수정 가능한 지저분한 요소를 먼저 정리했다.
+- inputs:
+- 사용자 스크린샷 기준 문제 목록
+- `image/` 배치 검수 결과
+- 기존 적용 자산:
+- `public/assets/world/town/*`
+- `public/assets/world/palace/*`
+- `public/assets/world/world-map/*`
+- `public/assets/ui/battle/*`
+- decisions:
+- 건물 포털은 깨진 이미지 시트를 더 이상 쓰지 않고 절차형 워프 글로우로 통일한다.
+- 마을 표지판은 잘못 잘린 이미지 대신 절차형 표지판으로 대체한다.
+- 궁궐 내부 배경은 블러가 심한 `royal_audience_hall` 사용을 중단하고 코드 기반 홀 레이아웃 + `throne_platform`으로 대체한다.
+- 궁궐 내부 NPC는 기존 마을/NPC 런타임 클립 재사용을 멈추고 임시 전용 스탠디 텍스처로 분리한다.
+- 월드맵은 새 랜드마크 아이콘을 노드 카드와 상단 미리보기에 같이 사용한다.
+- 전투/결과 화면은 큰 단색 패널 비중을 줄이고 배경이 살아 있는 방향으로 정리한다.
+- todo:
+- 오른쪽 스테이지 게이트 전용 `horizontal / vertical / corner` 성벽 세트가 들어오면 현재 절차형 벽을 교체
+- 궁궐 전용 런타임 NPC 스프라이트 시트가 들어오면 임시 스탠디 텍스처 교체
+- 전투 클리어 전용 결과 프레임 이미지가 들어오면 현재 fail 프레임 임시 공용 사용 종료
+- 버튼 프레임 전용 무문구 시트가 들어오면 글로벌 버튼 위젯 교체 검토
+- risks:
+- 현재 궁궐 NPC는 전용 임시 텍스처라 품질은 개선됐지만 최종 아트는 아님
+- 오른쪽 성벽은 구조는 정리됐지만 전용 모듈 이미지가 없어서 완전한 도트형 벽 세트는 아님
+- 일부 대화 초상은 도트 캐릭터와 완전 일치하지 않아 별도 초상 재생성이 계속 필요
+- artifacts_changed:
+- `src/game/scenes/VillageLobbyScene.ts`
+- `src/game/scenes/TownInteriorScene.ts`
+- `src/game/scenes/PalaceScene.ts`
+- `src/game/scenes/WorldMapScene.ts`
+- `src/game/scenes/BattleScene.ts`
+- `src/game/scenes/ResultScene.ts`
+- `src/game/ui/widgets.ts`
+- `src/game/data/worldMapRuntimeArt.ts`
+- handoff_to:
+- `asset_agent`
+- `qa_agent`
+- handoff_notes:
+- 성벽 모듈 세트와 궁궐 전용 NPC 시트가 오면 현재 임시 구조를 교체하는 패스로 이어간다.
+- 월드맵 랜드마크 아이콘은 이미 런타임 경로에 들어와 있어 추가 아트가 오면 같은 위치 교체만 하면 된다.
+- done_check:
+- 마을 포털이 깨진 다중 이미지 대신 절차형 글로우로만 보인다.
+- 궁궐 내부 배경에서 블러 홀 이미지가 제거된다.
+- 월드맵 노드에 랜드마크 아이콘이 표시된다.
+- 전투/결과 화면의 단색 패널 비중이 줄고 버튼이 기존보다 정리된 상태여야 한다.

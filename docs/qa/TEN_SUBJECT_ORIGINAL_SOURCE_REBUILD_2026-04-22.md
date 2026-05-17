@@ -1,0 +1,42 @@
+- summary:
+  - `Sera`, `Luna`, `Dorgan`, `Wolf`, `Erin`, `Nazir`, `Laila`, `Hakan`, `Seraphin`, `Micaela`는 패키지 시트 경로를 중단하고 `legacy-replaced/2026-04-07-source-refresh` 원본 마스터 시트를 기준으로 다시 생성하도록 전환했다.
+- inputs:
+  - 사용자 요청: 현재 이미지는 사용 불가로 판단되며, 원본 파일 기준으로 머리부터 다리까지 잘리지 않고 좌우 프레임 오염이 없는 프레임 재생성 필요
+- decisions:
+  - 위 10명은 `PACKAGE_PANEL_FULL_SUBJECT_IDS` 흐름을 쓰지 않는다.
+  - `extract_single_layout_subject()`에서 `FORCE_LEGACY_REFRESH_SUBJECT_IDS`를 도입해 패키지 시트를 완전히 우회한다.
+  - 현재 패스의 목적은 `원본 전환 + 런타임 재생성 + 품질 재판정`이다.
+- todo:
+  - `Luna`, `Dorgan`, `Wolf`, `Hakan`, `Seraphin`, `Micaela` 일부 클립은 아직 행 박스 수동 고정이 더 필요하다.
+  - 특히 `walk/run/attack_basic_*` 일부는 원본 전환 후에도 자동 분할이 불안정하다.
+  - 다음 패스에서 투명 마스터 시트 기준 `clip row source box`를 추가로 고정한다.
+- risks:
+  - 원본 전환만으로도 많은 좌우 오염은 줄었지만, 일부 캐릭터는 현재 자동 행/프레임 분할이 여전히 과하게 보수적이거나 잘못된 슬롯을 잡는다.
+  - 감사 리포트 기준 일부 subject는 아직 `fail` 상태다.
+- artifacts_changed:
+  - `scripts/generate-runtime-character-clips.py`
+  - `public/assets/runtime/characters/sera/*`
+  - `public/assets/runtime/characters/luna/*`
+  - `public/assets/runtime/characters/dorgan/*`
+  - `public/assets/runtime/characters/wolf/*`
+  - `public/assets/runtime/characters/erin/*`
+  - `public/assets/runtime/characters/nazir/*`
+  - `public/assets/runtime/characters/laila/*`
+  - `public/assets/runtime/characters/hakan/*`
+  - `public/assets/runtime/characters/seraphin/*`
+  - `public/assets/runtime/characters/micaela/*`
+  - `public/assets/runtime/character-animation-manifest.json`
+- handoff_to:
+  - next animation cleanup pass
+- handoff_notes:
+  - 대표 확인 파일:
+    - `public/assets/runtime/characters/luna/walk.png`
+    - `public/assets/runtime/characters/dorgan/attack_basic_01.png`
+    - `public/assets/runtime/characters/nazir/attack_basic_03.png`
+    - `public/assets/runtime/characters/hakan/walk.png`
+  - 감사 결과는 `output/qa/runtime-character-quality-report.json` 기준으로 다시 확인한다.
+- done_check:
+  - `원본 전환`: 완료
+  - `10명 런타임 재생성`: 완료
+  - `감사 및 리뷰 시트 재출력`: 완료
+  - `최종 합격`: 미완

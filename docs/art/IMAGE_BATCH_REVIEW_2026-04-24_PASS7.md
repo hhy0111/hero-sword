@@ -1,0 +1,58 @@
+- summary:
+  - Reviewed the new 4-file `image` batch directly and applied the usable assets to palace dialogue portraits and south gate wall art.
+- inputs:
+  - `image/01-lumen-village-square-south-wall-south-gate-tile-set.png`
+  - `image/02-palace-core-runtime-npc-sheet-remake.png`
+  - `image/03-palace-dialogue-portrait-set-remake.png`
+  - `image/04-optional-king-throne-event-portrait.png`
+- decisions:
+  - `APPLY`: `01-lumen-village-square-south-wall-south-gate-tile-set.png`
+    - Used as the preferred source for `gate_arch`, `wall_segment`, `wall_vertical`, `wall_corner`, `wall_tower`.
+    - Background removed with `rembg` so the beige gradient does not remain in scene.
+  - `APPLY`: `02-palace-core-runtime-npc-sheet-remake.png`
+    - Filename is misleading.
+    - Actual content is a `2x2 palace dialogue portrait set`, not a runtime dot sheet.
+    - Applied to:
+      - `queen_regent_celestine.png`
+      - `captain_rowan.png`
+      - `archivist_mirel.png`
+  - `APPLY`: `03-palace-dialogue-portrait-set-remake.png`
+    - Filename is misleading.
+    - Actual content is a single `King Aldren` portrait.
+    - Applied to `public/assets/dialogue/npcs/king_aldren.png`.
+  - `PREPARED_ONLY`: `04-optional-king-throne-event-portrait.png`
+    - Saved as `public/assets/dialogue/events/king_aldren_throne.png`.
+    - Not wired to a scene yet.
+  - `HOLD / STILL NEEDED`: palace runtime dot NPC sheet
+    - This batch does **not** include usable palace runtime dot sprites.
+    - Palace field NPCs still need a separate real dot sheet if we want palace characters to stop borrowing generic runtime silhouettes.
+- todo:
+  - Wire `king_aldren_throne.png` into a future palace event/cutscene.
+  - If palace field NPC quality matters, request a real palace runtime dot sheet instead of portrait art.
+  - If the south wall should show more decorative image tiles, integrate `wall_segment` and `wall_vertical` deeper into `VillageLobbyScene` instead of relying mostly on procedural block walls.
+- risks:
+  - `02` and `03` are visually good, but they do not solve palace field NPC quality because they are portraits only.
+  - `01` improves gate/tower assets, but the current town scene still intentionally uses simple square wall construction for most of the wall body.
+- artifacts_changed:
+  - `scripts/import_image_batch_2026_04_19.py`
+  - `public/assets/world/town/landmarks/gate_arch.png`
+  - `public/assets/world/town/landmarks/wall_segment.png`
+  - `public/assets/world/town/landmarks/wall_vertical.png`
+  - `public/assets/world/town/landmarks/wall_corner.png`
+  - `public/assets/world/town/landmarks/wall_tower.png`
+  - `public/assets/dialogue/npcs/king_aldren.png`
+  - `public/assets/dialogue/npcs/queen_regent_celestine.png`
+  - `public/assets/dialogue/npcs/captain_rowan.png`
+  - `public/assets/dialogue/npcs/archivist_mirel.png`
+  - `public/assets/dialogue/events/king_aldren_throne.png`
+- handoff_to:
+  - `ui_agent`
+  - `asset_agent`
+  - `qa_agent`
+- handoff_notes:
+  - Apply the new palace portraits immediately; do not mistake them for runtime sprite sheets.
+  - The new south gate tile set is better than the previous gate source and should remain the preferred source unless a cleaner dedicated south gate arrives.
+- done_check:
+  - `python scripts/import_image_batch_2026_04_19.py` pass
+  - `npm run typecheck` pass
+  - `node scripts/run-town-manual-checks.mjs` pass

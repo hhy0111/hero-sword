@@ -1,0 +1,16 @@
+node_modules/
+dist/
+dist-*/
+coverage/
+output/
+.vite/
+tmp-*
+tmp_*
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties

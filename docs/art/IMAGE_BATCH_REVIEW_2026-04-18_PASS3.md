@@ -1,0 +1,71 @@
+# IMAGE_BATCH_REVIEW_2026-04-18_PASS3
+
+- summary:
+  - Rechecked the newly added `image/` batch by opening the actual files and wiring the immediately usable art into runtime scenes.
+  - This pass focused on palace visuals, town north entrance polish, battle HUD polish, and runtime validation with fresh captures.
+- inputs:
+  - `image/18-lumen-palace-exterior.png`
+  - `image/20-lumen-palace-outer-court-ground.png`
+  - `image/22-lumen-palace-throne-platform.png`
+  - `image/23-the-archive-corridor-inside-lumen-palace.png`
+  - `image/중세 마을 벽 세트.png`
+  - `image/ChatGPT Image 2026년 4월 18일 오후 05_18_06.png`
+  - `image/ChatGPT Image 2026년 4월 18일 오후 05_18_20.png`
+  - existing held battle / result UI candidates in `image/`
+- decisions:
+  - `PATCH`: `18-lumen-palace-exterior.png`
+    - reason: clean transparent palace landmark; now used for the north palace entrance in the village.
+  - `PATCH`: `20-lumen-palace-outer-court-ground.png`
+    - reason: usable palace forecourt image; now placed under the north palace entrance to stop the empty white area.
+  - `PATCH`: `22-lumen-palace-throne-platform.png`
+    - reason: usable palace throne dais; now used inside `PalaceScene`.
+  - `PATCH`: `23-the-archive-corridor-inside-lumen-palace.png`
+    - reason: clean palace interior background; now used as the palace hall backdrop layer until a final audience-hall image arrives.
+  - `KEEP`: `06-battle-ui-button-frame-sheet-remake.png`
+    - reason: already applied as the global runtime button frame family.
+  - `KEEP`: `07-battle-bottom-command-bar-frame-remake.png`
+    - reason: already applied and now actively used behind the battle lower command area.
+  - `KEEP`: `09-palace-core-runtime-npc-sheet-remake.png`
+    - reason: file content is still a battle top HUD frame, not palace NPC runtime sprites; kept as battle HUD art.
+  - `HOLD`: `중세 마을 벽 세트.png`
+    - reason: strong wall direction, but the backdrop is still baked into the image. It needs clean alpha extraction before direct runtime use.
+  - `HOLD`: `ChatGPT Image 2026년 4월 18일 오후 05_18_06.png`
+    - reason: visually usable gate variant, but redundant with the currently connected gate set. Kept as alternate source.
+  - `HOLD`: `ChatGPT Image 2026년 4월 18일 오후 05_18_20.png`
+    - reason: same as above; alternate gate candidate, not a blocker.
+  - `HOLD`: `08-battle-result-clear-frame-remake.png`
+    - reason: still too soft / blurry for direct runtime use.
+  - `HOLD`: `16-battle-result-clear-frame.png`
+    - reason: still too soft / blurry for final result screen use.
+  - `HOLD`: `17-battle-result-fail-frame-2.png`
+    - reason: usable candidate, but current runtime result frame is already sufficient for the fail layout. No direct switch this pass.
+  - `HOLD`: `11-english-battle-button-sheet-remake.png`
+    - reason: baked English labels conflict with runtime language switching.
+- todo:
+  - Create a dedicated `palace core runtime NPC sheet` so palace actors stop rendering as temporary block placeholders.
+  - Create a final `audience hall` background that matches the throne scene better than the archive corridor fallback.
+  - Create a final `clear result frame`.
+  - Create a true `alpha-ready village wall modular kit` from the current wall direction.
+  - Create final `stage-select` frame family so the screen stops reading like a debug board.
+- risks:
+  - Palace entrance is now materially better, but still depends on mixed assets rather than a single final palace entry composition.
+  - Palace NPC runtime sprites remain the highest visual blocker in the palace scene.
+  - `capture:store` still fails at the battle-frame search step, so store verification is currently split between partial store captures and `test:town`.
+- artifacts_changed:
+  - `src/game/scenes/VillageLobbyScene.ts`
+  - `src/game/scenes/PalaceScene.ts`
+  - `src/game/scenes/BattleScene.ts`
+  - `src/game/scenes/ResultScene.ts`
+  - `scripts/run-town-manual-checks.mjs`
+- handoff_to:
+  - `asset_agent`
+  - `ui_agent`
+  - `qa_agent`
+- handoff_notes:
+  - Palace visuals are no longer waiting on code changes; the remaining blocker is art completeness.
+  - The wall-set file should not be discarded. It is a good direction, but it needs background cleanup into separate runtime pieces.
+  - The next productive art batch should prioritize `palace NPC runtime sheet`, `final audience hall`, `clear result frame`, and `alpha-ready wall kit`.
+- done_check:
+  - Newly added usable palace images were actually connected to runtime scenes.
+  - Held images were reclassified by actual content and documented.
+  - Fresh manual captures were generated after the changes.

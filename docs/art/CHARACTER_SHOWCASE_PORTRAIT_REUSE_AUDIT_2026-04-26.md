@@ -1,0 +1,53 @@
+# CHARACTER_SHOWCASE_PORTRAIT_REUSE_AUDIT_2026-04-26
+
+- summary:
+  - 장비/소환/상세 UI에 필요한 `증명사진형 캐릭터 이미지`는 상당수를 기존 자산으로 재사용 가능하다.
+  - 플레이어블 21명과 궁성 주요 NPC 4명은 이미 `dialogue portrait` 계열 PNG가 존재한다.
+  - 즉시 재사용 가능한 범위는 `장비 정비실`, `소환 배너 카드`, `결과 카드`, `NPC 대화 상세`다.
+- inputs:
+  - `public/assets/dialogue/characters/*.png`
+  - `public/assets/dialogue/npcs/*.png`
+  - `src/game/data/dialoguePortraitAssets.ts`
+- decisions:
+  - 플레이어블 캐릭터는 새로 만들지 않고 기존 dialogue portrait를 우선 재사용한다.
+  - 궁성 왕/왕비/근위대장/기록관도 기존 portrait를 우선 재사용한다.
+  - 새 생성 요청은 `기존 portrait로 해결되지 않는 전용 UI 컷`만 대상으로 한다.
+- todo:
+  - 장비 정비실 전용 `세로형 프로필 카드`가 필요하면 별도 프레임 아트만 추가 요청한다.
+  - 소환 결과 전용 `반신 일러스트 카드`가 필요하면 portrait 재사용이 아닌 별도 고급 일러스트 세트를 요청한다.
+- risks:
+  - dialogue portrait는 대화창 기준이라, 일부 UI에서는 크롭 여유가 부족할 수 있다.
+  - 통일된 증명사진 톤을 원하면 후속 보정 또는 재생성이 필요할 수 있다.
+- artifacts_changed:
+  - `public/assets/dialogue/characters/hero.png`
+  - `public/assets/dialogue/characters/bram.png`
+  - `public/assets/dialogue/characters/sera.png`
+  - `public/assets/dialogue/characters/luna.png`
+  - `public/assets/dialogue/characters/ria.png`
+  - `public/assets/dialogue/characters/theo.png`
+  - `public/assets/dialogue/characters/dorgan.png`
+  - `public/assets/dialogue/characters/kiera.png`
+  - `public/assets/dialogue/characters/helma.png`
+  - `public/assets/dialogue/characters/marin.png`
+  - `public/assets/dialogue/characters/serena.png`
+  - `public/assets/dialogue/characters/fin.png`
+  - `public/assets/dialogue/characters/iris.png`
+  - `public/assets/dialogue/characters/wolf.png`
+  - `public/assets/dialogue/characters/erin.png`
+  - `public/assets/dialogue/characters/nazir.png`
+  - `public/assets/dialogue/characters/laila.png`
+  - `public/assets/dialogue/characters/hakan.png`
+  - `public/assets/dialogue/characters/seraphin.png`
+  - `public/assets/dialogue/characters/micaela.png`
+  - `public/assets/dialogue/characters/lucian.png`
+  - `public/assets/dialogue/npcs/king_aldren.png`
+  - `public/assets/dialogue/npcs/queen_regent_celestine.png`
+  - `public/assets/dialogue/npcs/captain_rowan.png`
+  - `public/assets/dialogue/npcs/archivist_mirel.png`
+- handoff_to:
+  - `asset_agent`
+- handoff_notes:
+  - 플레이어블 portrait 신규 제작은 급하지 않다.
+  - 우선순위는 `장비 프레임`, `소환 연출용 배경`, `거점 꾸미기 전용 가구 아이콘` 쪽이다.
+- done_check:
+  - true

@@ -1,0 +1,67 @@
+# Selected Character Runtime Cleanup 2026-04-21
+
+- summary:
+  - Applied the same runtime edge cleanup / white fringe removal / silhouette darkening pass used on `hero` to `bram`, `ria`, `theo`, `kiera`, `helma`, `marin`, `serena`, `fin`, `iris`.
+  - Fixed the two broken runtime outputs that blocked the pass:
+    - `iris / attack_basic_01` now uses the approved-master source for manual source-box extraction.
+    - `fin / shoot_loop` now uses the paired-layout manual source-box path and no longer leaks scaled pixels across frame cells.
+- inputs:
+  - User request to inspect the nine subjects one by one and remove leftover white/background residue around the silhouette, then darken the outline where needed.
+  - Existing hero cleanup path in `scripts/generate-runtime-character-clips.py`.
+- decisions:
+  - Added selected-subject outline cleanup to paired-layout extraction as well as single-layout extraction.
+  - Added clip-level manual source-image override for `iris / attack_basic_01` because its manual boxes were authored against the approved master sheet, not the legacy refresh sheet.
+  - Kept `fin / shoot_loop` on the legacy manual box path, but fixed post-scale spill so each frame remains isolated inside its own 64x64 cell.
+- todo:
+  - Continue with scale / anchor jitter cleanup only for the remaining caution clips.
+  - If `down_or_death` remains weak for `kiera`, `marin`, `serena`, `iris`, recut from original source instead of over-polishing the current runtime strip.
+- risks:
+  - Remaining non-pass clips are now mostly jitter / pose-size / special-action caution clips, not white-edge or background-residue failures.
+  - `bram` and `ria` still have many caution clips because their motion sets are broader and more varied.
+- artifacts_changed:
+  - `scripts/generate-runtime-character-clips.py`
+  - `public/assets/runtime/characters/bram/*.png`
+  - `public/assets/runtime/characters/ria/*.png`
+  - `public/assets/runtime/characters/theo/*.png`
+  - `public/assets/runtime/characters/kiera/*.png`
+  - `public/assets/runtime/characters/helma/*.png`
+  - `public/assets/runtime/characters/marin/*.png`
+  - `public/assets/runtime/characters/serena/*.png`
+  - `public/assets/runtime/characters/fin/*.png`
+  - `public/assets/runtime/characters/iris/*.png`
+  - `public/assets/runtime/animation-manifest.json`
+  - `output/qa/runtime-character-quality-report.json`
+  - `output/qa/character-frame-review/bram/*`
+  - `output/qa/character-frame-review/ria/*`
+  - `output/qa/character-frame-review/theo/*`
+  - `output/qa/character-frame-review/kiera/*`
+  - `output/qa/character-frame-review/helma/*`
+  - `output/qa/character-frame-review/marin/*`
+  - `output/qa/character-frame-review/serena/*`
+  - `output/qa/character-frame-review/fin/*`
+  - `output/qa/character-frame-review/iris/*`
+- handoff_to:
+  - next character-runtime cleanup pass
+- handoff_notes:
+  - Visual fixes confirmed directly on runtime strips:
+    - `public/assets/runtime/characters/fin/shoot_loop.png`
+    - `public/assets/runtime/characters/iris/attack_basic_01.png`
+  - Reference review sheets:
+    - `output/qa/character-frame-review/bram/attack_basic_01-all-frames.png`
+    - `output/qa/character-frame-review/serena/attack_basic_01-all-frames.png`
+    - `output/qa/character-frame-review/fin/shoot_loop-all-frames.png`
+    - `output/qa/character-frame-review/iris/attack_basic_01-all-frames.png`
+- done_check:
+  - `python scripts/audit-runtime-character-clips.py --subject bram --subject ria --subject theo --subject kiera --subject helma --subject marin --subject serena --subject fin --subject iris`
+  - `python scripts/export-character-frame-review.py --subject bram --subject ria --subject theo --subject kiera --subject helma --subject marin --subject serena --subject fin --subject iris`
+  - `npm run typecheck`
+  - Current summary:
+    - `bram`: caution `3 pass / 12 caution / 0 fail`
+    - `ria`: caution `5 pass / 9 caution / 0 fail`
+    - `theo`: caution `11 pass / 2 caution / 0 fail`
+    - `kiera`: caution `12 pass / 1 caution / 0 fail`
+    - `helma`: pass `15 pass / 0 caution / 0 fail`
+    - `marin`: caution `11 pass / 3 caution / 0 fail`
+    - `serena`: caution `13 pass / 1 caution / 0 fail`
+    - `fin`: caution `9 pass / 4 caution / 0 fail`
+    - `iris`: caution `9 pass / 6 caution / 0 fail`

@@ -1,0 +1,49 @@
+- summary:
+  - Re-ran visual judgment after the current-image polish pass focused on `PartyScene`, `EquipmentScene`, `BattleScene`, and `PalaceScene`.
+  - Confirmed that the remaining issues are now mostly `layout / staging polish`, not `broken implementation`.
+- inputs:
+  - `output/store-screenshots/store_04_party.png`
+  - `output/store-screenshots/store_05_equipment.png`
+  - `output/store-screenshots/store_06_battle_field.png`
+  - `output/town-dev-preview/manual-checks/palace-flow.png`
+  - `output/web-game/state-0.json`
+  - `output/web-game/shot-0.png`
+- decisions:
+  - `CURRENT_IMAGE_FIXABLE / STABLE`
+    - `PartyScene`
+      - Major panel collision is removed.
+      - The screen now reads as an actual roster-management screen instead of a broken test view.
+    - `EquipmentScene`
+      - Top portrait / loadout / item-column layout is readable.
+      - Footer button area no longer collides with the main content.
+    - `PalaceScene`
+      - The giant blue overlay that made the hall look broken is gone.
+      - Palace NPC sprites are now usable in-scene with dedicated runtime/fallback art.
+  - `CURRENT_IMAGE_FIXABLE / STILL_NEEDS_CODE_POLISH`
+    - `BattleScene`
+      - The HUD is cleaner and the text stack is now usable.
+      - The battlefield still gets visually dense during heavy overlap, so this remains a code-polish target rather than an art blocker.
+    - `PalaceScene`
+      - The throne-room composition is now usable, but the king/throne staging is still stylized rather than fully natural.
+  - `NEW_IMAGE_REQUIRED / FINAL_POLISH_ONLY`
+    - `South wall + south gate seamless tile kit`
+      - Still the only hard environment art gap.
+- todo:
+  - One more combat-spacing / VFX-density pass in `BattleScene`.
+  - Optional final palace staging pass if the throne composition still feels too artificial in manual play.
+  - Leave `PartyScene` and `EquipmentScene` alone unless a new concrete visual bug appears.
+- risks:
+  - `BattleScene` can still feel busy when multiple runtime effects overlap in the same lane.
+  - `web_game_playwright_client` reached only `booting` state with the default action burst, so browser-client verification was weaker than the manual scene captures.
+- artifacts_changed:
+  - `docs/ui/VISUAL_JUDGE_2026-04-20_PASS1.md`
+- handoff_to:
+  - `ui_agent`
+  - `qa_agent`
+- handoff_notes:
+  - Do not reopen new art requests for `PartyScene` or `EquipmentScene`.
+  - Continue from `BattleScene` only if there is a specific readability complaint.
+  - Keep the remaining art request surface limited to the south-wall modular tile kit.
+- done_check:
+  - Latest party/equipment/battle/palace screenshots reopened
+  - Current-image fixable targets reclassified after the latest polish pass

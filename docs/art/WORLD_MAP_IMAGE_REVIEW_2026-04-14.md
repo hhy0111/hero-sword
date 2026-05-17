@@ -1,0 +1,83 @@
+# 2026-04-14 World Map Image Review
+
+- summary:
+  - `image/` 검수본 중 월드맵에 바로 적용 가능한 배경/지역판 이미지를 선별했다.
+  - 포털/버튼/성벽/분수 계열은 알파 또는 내용 불일치 문제로 이번 패스에서는 보류했다.
+- inputs:
+  - `image/01-world-overview-background.png`
+  - `image/02-continent-01-region-plate-1.png`
+  - `image/02-continent-01-region-plate-2.png`
+  - `image/03-continent-02-region-plate.png`
+  - `image/04-continent-03-region-plate.png`
+  - `image/05-continent-04-region-plate.png`
+  - `image/06-continent-05-region-plate.png`
+  - `image/07-continent-06-region-plate-1.png`
+  - `image/07-continent-06-region-plate-2.png`
+  - `image/08-final-route-plate.png`
+  - `image/09-region-landmark-icon-sheet.png`
+  - `image/10-lumen-village-outer-border.png`
+  - `image/11-lumen-village-world-exit-gate.png`
+  - `image/12-the-center-plaza-of-lumen-village.png`
+  - `image/13-central-fountain-in-lumen-village.png`
+  - `image/14-safe-warp-marker-runtime-sheet.png`
+  - `image/15-english-primary-button-sheet.png`
+  - `image/16-english-utility-button-sheet.png`
+  - `image/17-english-battle-button-sheet.png`
+- decisions:
+  - `KEEP`: `01-world-overview-background.png`
+    - 월드맵 전체 배경으로 사용 가능.
+  - `KEEP`: `02-continent-01-region-plate-2.png`
+    - `continent_01` 대표 이미지로 사용 가능.
+  - `KEEP`: `03-continent-02-region-plate.png`
+    - `continent_02` 대표 이미지로 사용 가능.
+  - `KEEP`: `04-continent-03-region-plate.png`
+    - `continent_03` 대표 이미지로 사용 가능.
+  - `KEEP`: `05-continent-04-region-plate.png`
+    - `continent_04` 대표 이미지로 사용 가능.
+  - `KEEP`: `06-continent-05-region-plate.png`
+    - `continent_05` 대표 이미지로 사용 가능.
+  - `KEEP`: `07-continent-06-region-plate-1.png`
+    - `continent_06` 대표 이미지로 사용 가능.
+  - `KEEP`: `08-final-route-plate.png`
+    - 최종 루트 전용 이미지로 보관 가치 있음.
+  - `PATCH`: `02-continent-01-region-plate-1.png`
+    - 대륙 카드라기보다 전체 월드 개요에 가까워 이번 적용에서는 제외.
+  - `PATCH`: `07-continent-06-region-plate-2.png`
+    - 같은 대륙 대체안이며 이번 패스에서는 `-1`을 우선 채택.
+  - `REPLACE`: `09-region-landmark-icon-sheet.png`
+    - 체커보드가 실제 이미지에 구워져 있어 아이콘 시트로 바로 사용 불가.
+  - `REPLACE`: `10-lumen-village-outer-border.png`
+    - 투명 배경 자산이 아니라 배경이 포함된 단일 이미지라 런타임 성벽으로 바로 사용 불가.
+  - `REPLACE`: `11-lumen-village-world-exit-gate.png`
+    - 게이트 단독 오브젝트로 쓰기에는 배경/테두리 잔여가 남아 있음.
+  - `REPLACE`: `12-the-center-plaza-of-lumen-village.png`
+    - 파일명과 실제 내용이 다르고 광장 자산이 아님.
+  - `REPLACE`: `13-central-fountain-in-lumen-village.png`
+    - 분수 자체는 적합하지만 체커보드 배경이 이미지에 포함돼 있어 직접 사용 불가.
+  - `REPLACE`: `14-safe-warp-marker-runtime-sheet.png`
+    - 워프 시트에 체커보드가 구워져 있어 런타임 애니메이션 시트로 직접 사용 불가.
+  - `REPLACE`: `15-english-primary-button-sheet.png`
+    - 버튼 시트가 흐리고 배경 체커보드가 포함돼 있어 직접 슬라이싱 불가.
+  - `REPLACE`: `16-english-utility-button-sheet.png`
+    - 버튼 시트가 흐리고 배경 체커보드가 포함돼 있어 직접 슬라이싱 불가.
+  - `REPLACE`: `17-english-battle-button-sheet.png`
+    - 버튼 시트가 흐리고 배경 체커보드가 포함돼 있어 직접 슬라이싱 불가.
+- todo:
+  - `09~17` 계열은 실제 알파가 들어간 재생성본이 필요하다.
+  - `12`는 광장 이미지로 다시 받아야 한다.
+- risks:
+  - 이번 패스는 월드맵 시각 품질 개선에 집중한 것이고, 마을 성벽/분수/포털은 아직 새 자산이 필요하다.
+- artifacts_changed:
+  - `public/assets/world/world-map/*`
+  - `src/game/data/worldMapRuntimeArt.ts`
+  - `src/game/scenes/BootScene.ts`
+  - `src/game/scenes/WorldMapScene.ts`
+- handoff_to:
+  - `asset_agent`
+  - `ui_agent`
+- handoff_notes:
+  - 월드맵은 신규 이미지가 연결됐고, 타운/버튼 자산은 이번 검수 기준 `재생성 필요`다.
+  - 적용된 월드맵 런타임 이미지는 Phaser 로딩 안정성을 위해 `480x720` 표준 PNG로 다시 저장했다.
+- done_check:
+  - 월드맵용 승인 자산 선별 완료
+  - 런타임 연결 대상 확정 완료
