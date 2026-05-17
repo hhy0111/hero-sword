@@ -129,7 +129,7 @@
 
 ### D-014 스토어 정체성 기본값 확정
 
-- 결정: Android 패키지명은 `com.appstudioon.herosword`, 개발자명은 `AppStudioOn`, 지원 메일은 `young02hwi@gmail.com`, 개인정보처리방침 URL은 `https://appstudioon.github.io/game307/privacy-policy.html`로 둔다.
+- 결정: Android 패키지명은 `com.appstudioon.herosword`, 개발자명은 `AppStudioOn`, 지원 메일은 `young02hwi@gmail.com`, 개인정보처리방침 URL은 `https://hhy0111.github.io/hero-sword/privacy-policy.html`로 둔다.
 - 이유: Gate 6 릴리즈 입력값 중 문서/코드에 고정 가능한 항목을 먼저 확정해 상용 준비 블로커를 줄이기 위함
 - 영향 문서: `src/config/runtime.ts`, `android/app/build.gradle`, `docs/release_ops/*`, `docs/privacy-policy.html`
 - QA 재확인 필요: `예`

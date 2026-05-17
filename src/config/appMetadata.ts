@@ -3,5 +3,5 @@ export const appMetadata = {
   packageName: 'com.appstudioon.herosword',
   developerName: 'AppStudioOn',
   supportEmail: 'young02hwi@gmail.com',
-  privacyPolicyUrl: 'https://appstudioon.github.io/game307/privacy-policy.html',
+  privacyPolicyUrl: 'https://hhy0111.github.io/hero-sword/privacy-policy.html',
 } as const;

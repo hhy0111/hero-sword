@@ -54,7 +54,7 @@
 | 패키지명 | `com.appstudioon.herosword` | 확정 |
 | 개발자명 | `AppStudioOn` | 확정 |
 | 지원 메일 | `young02hwi@gmail.com` | 확정 |
-| 개인정보처리방침 URL | `https://appstudioon.github.io/game307/privacy-policy.html` | GitHub Pages 경로 가정 |
+| 개인정보처리방침 URL | `https://hhy0111.github.io/hero-sword/privacy-policy.html` | GitHub Pages 경로 확정 |
 | 한국 기준 가격표 | 스타터 `₩1,500`, 피로도 소형 `₩1,200`, 피로도 대형 `₩2,400`, 젬 묶음 `₩7,900` | 확정 |
 
 ## 확정된 월드/시나리오 기준

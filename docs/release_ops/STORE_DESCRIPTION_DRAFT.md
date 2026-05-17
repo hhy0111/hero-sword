@@ -32,4 +32,4 @@
 ## 메모
 
 - 실제 등록 시 짧은 설명 글자 수 제한에 맞게 한 번 더 압축한다.
-- 개발자명 `AppStudioOn`, 지원 메일 `young02hwi@gmail.com`, 정책 URL `https://appstudioon.github.io/game307/privacy-policy.html` 기준으로 맞춘다.
+- 개발자명 `AppStudioOn`, 지원 메일 `young02hwi@gmail.com`, 정책 URL `https://hhy0111.github.io/hero-sword/privacy-policy.html` 기준으로 맞춘다.

@@ -8,7 +8,7 @@
 | 패키지명 | `com.appstudioon.herosword` | 확정 |
 | 개발자명 | `AppStudioOn` | 확정 |
 | 지원 메일 | `young02hwi@gmail.com` | 확정 |
-| 개인정보처리방침 URL | `https://appstudioon.github.io/game307/privacy-policy.html` | 페이지 파일 준비: `privacy-policy.html`, `docs/privacy-policy.html` |
+| 개인정보처리방침 URL | `https://hhy0111.github.io/hero-sword/privacy-policy.html` | 페이지 파일 준비: `privacy-policy.html`, `docs/privacy-policy.html` |
 | 카테고리 | 게임 / RPG [초안] | 초안 |
 | 광고 포함 여부 | 예 | 확정 |
 | 대상 연령 | 전체 [확인 필요] | 미확정 |

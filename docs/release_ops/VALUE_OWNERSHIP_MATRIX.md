@@ -6,7 +6,7 @@
 | 패키지명 | 콘솔 + 빌드 | `com.appstudioon.herosword` | `src/config/runtime.ts`, `capacitor.config.ts`, Android/스토어 설정 | `release_ops_agent` + 사람 | 확정 |
 | 개발자명 | 사람 직접 입력 | `AppStudioOn` | Play Console | 사람 | 확정 |
 | 지원 메일 | 사람 직접 입력 | `young02hwi@gmail.com` | Play Console, 문의 화면 | 사람 | 확정 |
-| 정책 URL | 사람 직접 입력 | `https://appstudioon.github.io/game307/privacy-policy.html` | Play Console, 앱 내 링크 | 사람 | GitHub Pages 경로 가정 |
+| 정책 URL | 사람 직접 입력 | `https://hhy0111.github.io/hero-sword/privacy-policy.html` | Play Console, 앱 내 링크 | 사람 | GitHub Pages 경로 확정 |
 | 광고 App ID | 코드 연결값 | `TEST_APP_ID` + `YOUR_VALUE_HERE_AD_APP_ID` | `android/app/src/main/res/values/strings.xml`, `src/config/runtime.ts` | `release_ops_agent` | 테스트 연결 완료 |
 | 배너 Unit ID | 코드 연결값 | `TEST_BANNER_UNIT_ID` + `YOUR_VALUE_HERE_BANNER_UNIT_ID` | `src/platform/ads.ts`, `src/config/runtime.ts` | `release_ops_agent` | 테스트 연결 완료 |
 | 전면 Unit ID | 코드 연결값 | `TEST_INTERSTITIAL_UNIT_ID` + `YOUR_VALUE_HERE_INTERSTITIAL_UNIT_ID` | `src/platform/ads.ts`, `src/config/runtime.ts` | `release_ops_agent` | 테스트 연결 완료 |

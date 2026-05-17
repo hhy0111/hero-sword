@@ -74,7 +74,7 @@
 | 앱 이름 | `히어로소드 (Hero Sword)` | 초안 | `planner_agent` |
 | 개발자명 | `AppStudioOn` | 확정 | 사람 |
 | 지원 메일 | `young02hwi@gmail.com` | 확정 | 사람 |
-| 개인정보처리방침 URL | `https://appstudioon.github.io/game307/privacy-policy.html` | GitHub Pages 경로 가정 | 사람 |
+| 개인정보처리방침 URL | `https://hhy0111.github.io/hero-sword/privacy-policy.html` | GitHub Pages 경로 확정 | 사람 |
 | 스토어 설명 | `STORE_DESCRIPTION_DRAFT.md` 초안 | 작성됨 | `planner_agent` |
 | 콘텐츠 등급 | `[확인 필요]` | 미확정 | 사람 |
 | 광고 포함 여부 | 예 | 확정 | `release_ops_agent` |

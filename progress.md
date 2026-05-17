@@ -3256,7 +3256,7 @@ Original prompt: 현재까지 진행상황 체크해줘. 게임 웹에서 실행
 - Goal:
   - create a public HTML privacy policy page for Google Play Console registration.
 - File handling:
-  - `ADD_NEW`: `privacy-policy.html` - root-level GitHub Pages privacy policy page for `https://appstudioon.github.io/game307/privacy-policy.html`.
+  - `ADD_NEW`: `privacy-policy.html` - root-level GitHub Pages privacy policy page for `https://hhy0111.github.io/hero-sword/privacy-policy.html`.
   - `PATCH`: `docs/privacy-policy.html` - matched the same privacy policy content for GitHub Pages `/docs` source mode.
   - `PATCH`: `docs/release_ops/STORE_PREP.md` - marked the privacy policy URL page file as prepared.
 - Notes:
