@@ -8,7 +8,7 @@
 | 패키지명 | `com.appstudioon.herosword` | 확정 |
 | 개발자명 | `AppStudioOn` | 확정 |
 | 지원 메일 | `young02hwi@gmail.com` | 확정 |
-| 개인정보처리방침 URL | `https://hhy0111.github.io/hero-sword/privacy-policy.html` | 페이지 파일 준비: `privacy-policy.html`, `docs/privacy-policy.html`, 앱 내 옵션 링크 |
+| 개인정보처리방침 URL | `https://hhy0111.github.io/hero-sword/privacy-policy.html` | 공개 URL 접근 확인, 앱 내 옵션 링크 |
 | 카테고리 | 게임 / 롤플레잉 | 확정 |
 | 광고 포함 여부 | 예 | 확정 |
 | 대상 연령 | 13세 이상 (`13~15세`, `16~17세`, `만 18세 이상`) | Play Console 입력 기준 확정 |

@@ -3289,7 +3289,7 @@ Original prompt: 현재까지 진행상황 체크해줘. 게임 웹에서 실행
   - Retried with `JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-21.0.10.7-hotspot`; `android\gradlew.bat -p android bundleRelease` passed.
   - Generated AAB: `android/app/build/outputs/bundle/release/app-release.aab`, `243,143,220` bytes.
   - `jarsigner -verify -verbose -certs android/app/build/outputs/bundle/release/app-release.aab` reports `jar is unsigned`.
+  - `Invoke-WebRequest https://hhy0111.github.io/hero-sword/privacy-policy.html` returned HTTP 200 and title `히어로소드 개인정보처리방침 | Hero Sword Privacy Policy`.
 - Remaining blockers:
-  - GitHub Pages must be enabled from the GitHub web UI because `gh` CLI is not installed in this environment.
   - signed AAB still needs a release/upload key.
   - Android real-device ad/IAP flows still need device verification.

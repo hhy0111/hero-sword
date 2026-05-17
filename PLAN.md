@@ -91,7 +91,6 @@
 - 가챠 확률표 검토
 - 대사 시트 본문 확장
 - 대륙별 서브 퀘스트와 이벤트 대화 작성
-- GitHub Pages가 `https://hhy0111.github.io/hero-sword/privacy-policy.html`에서 실제 공개되는지 확인
 
 ## 초기 리스크
 
