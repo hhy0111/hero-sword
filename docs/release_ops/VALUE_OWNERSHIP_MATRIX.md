@@ -18,4 +18,4 @@
 | 모의 결제 스위치 | 코드 연결값 | `import.meta.env.DEV` / `VITE_USE_MOCK_STORE_RESULTS` | `src/config/runtime.ts` | `release_ops_agent` | 구현됨 |
 | 서명키 | 사람 직접 입력 | `YOUR_VALUE_HERE_SIGNING_CONFIG` | Android 빌드 환경 | 사람 | placeholder |
 | Android SDK 경로 | 사람 직접 입력 | `[내 PC 경로]` | `android/local.properties` | 사람 | [TODO] |
-| 데이터 세이프티 답변 | 콘솔 입력값 | `[확인 필요]` | Play Console | 사람 | 미확정 |
+| 데이터 세이프티 답변 | 콘솔 입력값 | `PLAY_CONSOLE_DATA_SAFETY_ANSWERS.md` 기준 | Play Console | 사람 | 답변안 확정, 콘솔 저장 확인 필요 |

@@ -3262,3 +3262,34 @@ Original prompt: 현재까지 진행상황 체크해줘. 게임 웹에서 실행
 - Notes:
   - The page discloses local save data, AdMob advertising data, Google Play / RevenueCat purchase data, GitHub Pages hosting logs, retention/deletion, security, and contact information.
   - Final Play Console Data safety answers must stay consistent with this page.
+
+## 2026-05-18 release ops follow-up
+
+- Goal:
+  - continue actionable TODO items from `TODO.md`, `PLAN.md`, and release_ops documents without marking external console/hardware work as complete.
+- File handling:
+  - `ADD_NEW`: `.nojekyll` - keeps GitHub Pages from applying Jekyll processing to the static privacy page.
+  - `ADD_NEW`: `src/platform/externalLinks.ts` - HTTPS-only external link helper for policy links.
+  - `ADD_NEW`: `tests/externalLinks.test.ts` - TDD coverage for safe external policy URL opening.
+  - `PATCH`: `src/game/scenes/OptionsScene.ts` - adds a 개인정보처리방침 button and exposes `open_privacy_policy` in debug actions.
+  - `ADD_NEW`: `docs/release_ops/PLAY_CONSOLE_DATA_SAFETY_ANSWERS.md` - fixed current Data safety inputs for AdMob, Google Play Billing, and RevenueCat.
+  - `ADD_NEW`: `assets/source/store-ready-assets/play-upload/hero-sword-app-icon-512.png` - Play Console-sized app icon.
+  - `ADD_NEW`: `assets/source/store-ready-assets/play-upload/hero-sword-feature-graphic-1024x500.jpg` - Play Console-sized feature graphic.
+  - `PATCH`: `TODO.md`, `PLAN.md`, and release_ops documents - separated completed local work from remaining external checks.
+- Verification:
+  - expected failing test first: `npm test -- --run tests/externalLinks.test.ts` failed because `src/platform/externalLinks.ts` did not exist.
+  - `npm test -- --run tests/externalLinks.test.ts` passed.
+  - `npm run typecheck` passed.
+  - `npm test` passed 18 files / 78 tests.
+  - `npm run build` passed.
+  - `npm run test:smoke` completed with exit code 0.
+  - Play upload images checked: app icon `512x512`, feature graphic `1024x500`.
+  - `npm run build:android` passed and synced web assets into Android.
+  - First `android\gradlew.bat -p android bundleRelease` failed because the shell was using JDK 17 (`invalid source release: 21`).
+  - Retried with `JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-21.0.10.7-hotspot`; `android\gradlew.bat -p android bundleRelease` passed.
+  - Generated AAB: `android/app/build/outputs/bundle/release/app-release.aab`, `243,143,220` bytes.
+  - `jarsigner -verify -verbose -certs android/app/build/outputs/bundle/release/app-release.aab` reports `jar is unsigned`.
+- Remaining blockers:
+  - GitHub Pages must be enabled from the GitHub web UI because `gh` CLI is not installed in this environment.
+  - signed AAB still needs a release/upload key.
+  - Android real-device ad/IAP flows still need device verification.

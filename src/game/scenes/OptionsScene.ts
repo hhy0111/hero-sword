@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
+import { appMetadata } from '../../config/appMetadata';
 import { isAnimationViewerMenuEnabled, isAssetStatusMenuEnabled } from '../../config/runtime';
+import { openExternalHttpsUrl } from '../../platform/externalLinks';
 import { AtlasFrame } from '../data/atlas';
 import { type LanguageCode, LANGUAGE_OPTIONS, getLanguage, setLanguage, t } from '../services/i18n';
 import { loadSnapshot } from '../services/save';
@@ -47,6 +49,14 @@ export class OptionsScene extends Phaser.Scene {
     });
 
     this.createLanguageButtons();
+    createButton(this, 180, 286, {
+      width: 220,
+      height: 36,
+      label: t(this, 'Privacy Policy', undefined, '개인정보처리방침'),
+      iconFrame: AtlasFrame.MapIcon,
+      backgroundFrame: AtlasFrame.BlueButton,
+      onClick: () => this.openPrivacyPolicy(),
+    });
 
     createButton(this, 180, 334, {
       width: 220,
@@ -98,7 +108,13 @@ export class OptionsScene extends Phaser.Scene {
         language: getLanguage(this),
         devAnimationViewerVisible: isAnimationViewerMenuEnabled(),
         devAssetStatusVisible: isAssetStatusMenuEnabled(),
-        availableActions: ['change_language', 'back_to_village', 'open_animation_viewer', 'open_asset_status'],
+        availableActions: [
+          'change_language',
+          'open_privacy_policy',
+          'back_to_village',
+          'open_animation_viewer',
+          'open_asset_status',
+        ],
       }),
     );
   }
@@ -128,6 +144,10 @@ export class OptionsScene extends Phaser.Scene {
         },
       });
     });
+  }
+
+  private openPrivacyPolicy(): void {
+    openExternalHttpsUrl(appMetadata.privacyPolicyUrl);
   }
 
   private openAnimationViewer(): void {

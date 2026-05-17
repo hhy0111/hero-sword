@@ -18,6 +18,20 @@
 4. 새 터미널을 열고 `java -version`으로 21 버전인지 확인한다.
 5. 저장소 루트에서 `android\\gradlew.bat assembleDebug`를 실행한다.
 
+## 현재 확인값
+
+- JDK 21 설치 경로: `C:\Program Files\Eclipse Adoptium\jdk-21.0.10.7-hotspot`
+- 현재 터미널 기본 `JAVA_HOME`: `C:\Program Files\Eclipse Adoptium\jdk-17.0.18.8-hotspot\`
+- 임시 빌드 명령:
+
+```powershell
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.10.7-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+android\gradlew.bat -p android bundleRelease
+```
+
+위 임시 명령으로 `android/app/build/outputs/bundle/release/app-release.aab` 생성은 가능하다. 단, Play Console 업로드용 signed AAB를 만들려면 release/upload keystore 설정이 별도로 필요하다.
+
 ## 점검 포인트
 
 - `java -version` 출력이 `21` 계열인가

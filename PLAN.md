@@ -80,17 +80,18 @@
 
 ## [확인 필요]
 
-- Google Play 데이터 세이프티 답변 값
+- Google Play 데이터 세이프티 콘솔 저장 완료 여부
 - Play Console 서명키 / 실광고 / 실결제 계정 실값
 
 ## [TODO]
 
-- 스토어 설명 최종 문안 확정
-- 최종 상용 아트/아이콘 반영
+- Play Console 스토어 등록정보 입력 저장
+- Play Console 데이터 세이프티 입력 저장
+- 최종 상용 아트/아이콘 승인 유지
 - 가챠 확률표 검토
 - 대사 시트 본문 확장
 - 대륙별 서브 퀘스트와 이벤트 대화 작성
-- GitHub Pages repo slug가 `game307`과 다르면 정책 URL만 재고정
+- GitHub Pages가 `https://hhy0111.github.io/hero-sword/privacy-policy.html`에서 실제 공개되는지 확인
 
 ## 초기 리스크
 

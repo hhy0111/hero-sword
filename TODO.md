@@ -214,3 +214,13 @@
 
 - [x] 장비 장착 시 캐릭터 레벨 요구 조건을 실제로 강제한다.
 - [x] 상점 장비 상품에 현재 착용 장비 대비 전투력 변화와 레벨 부족 여부를 표시한다.
+
+## 2026-05-18 Release Ops Follow-up
+
+- [x] Play Console 데이터 세이프티 입력 기준을 `docs/release_ops/PLAY_CONSOLE_DATA_SAFETY_ANSWERS.md`로 문서화한다.
+- [x] 앱 옵션 화면에 개인정보처리방침 외부 링크 버튼을 추가한다.
+- [x] Play Console 업로드용 `512x512` 앱 아이콘과 `1024x500` 피처 그래픽을 생성한다.
+- [x] 최신 코드 기준 unsigned release AAB를 재생성하고 서명 상태를 확인한다.
+- [ ] GitHub Pages 설정 후 `https://hhy0111.github.io/hero-sword/privacy-policy.html` 접근을 확인한다.
+- [ ] Play Console 데이터 세이프티 저장 완료를 콘솔에서 확인한다.
+- [ ] Play Console 내부 테스트 업로드용 signed AAB를 생성한다.

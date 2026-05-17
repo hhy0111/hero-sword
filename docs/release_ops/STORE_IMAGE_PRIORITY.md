@@ -25,6 +25,7 @@
 P0 완료 기준:
 - 아이콘, 피처 그래픽, 핵심 스크린샷 4종이 같은 브랜드 톤으로 묶인다.
 - 스크린샷만 봐도 `마을`, `탐험`, `전투`, `보스전` 흐름이 읽힌다.
+- Play Console 직접 업로드용 리사이즈 파일은 `assets/source/store-ready-assets/play-upload/` 아래에 둔다.
 
 ## P1 출시 설명 강화
 
@@ -53,6 +54,17 @@ P0 완료 기준:
 4. 일반 전투
 5. 보스전
 6. 월드맵
+
+## 현재 업로드 후보
+
+| 용도 | 파일 |
+| --- | --- |
+| 앱 아이콘 | `assets/source/store-ready-assets/play-upload/hero-sword-app-icon-512.png` |
+| 피처 그래픽 | `assets/source/store-ready-assets/play-upload/hero-sword-feature-graphic-1024x500.jpg` |
+| 로비 마을 | `assets/source/store-ready-assets/approved/04-screenshot-village-lobby.png` |
+| 일반 전투 | `assets/source/store-ready-assets/approved/08-screenshot-normal-battle.png` |
+| 보스전 | `assets/source/store-ready-assets/approved/09-screenshot-boss-battle.png` |
+| 월드맵 | `assets/source/store-ready-assets/approved/05-screenshot-world-map.png` |
 
 ## 제작 전 체크
 
