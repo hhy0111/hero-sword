@@ -50,12 +50,13 @@
 - [x] 개발자명/지원 메일/가격표 확정
 - [ ] Play Console 개발자 정보 입력
 - [x] 개인정보처리방침 HTML 작성 및 GitHub Pages URL 고정
-- [ ] 서명키 준비
+- [x] 서명키 준비
 - [x] 데이터 세이프티 답변 문서화
 - [ ] 데이터 세이프티 Play Console 저장 확인
 - [x] 빌드 머신 JDK 21 설치 경로 확인
 - [ ] 터미널 `JAVA_HOME` JDK 21 영구 설정
 - [x] 최신 unsigned release AAB 재생성
+- [x] 내부 테스트 업로드용 signed AAB 생성
 
 ## Gate 7
 

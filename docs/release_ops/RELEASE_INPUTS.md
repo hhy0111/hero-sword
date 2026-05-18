@@ -79,7 +79,7 @@
 | 콘텐츠 등급 | `[확인 필요]` | 미확정 | 사람 |
 | 광고 포함 여부 | 예 | 확정 | `release_ops_agent` |
 | 데이터 세이프티 | `[확인 필요]` | 미확정 | 사람 |
-| 서명키 / 빌드 설정 | `YOUR_VALUE_HERE_SIGNING_CONFIG` | placeholder | 사람 |
+| 서명키 / 빌드 설정 | `android/keystore.properties` + `android/keystores/hero-sword-upload-key.jks` | 로컬 전용 생성 완료, git 제외 | 사람 |
 | 배포 트랙 | 내부 테스트 -> 클로즈드 -> 프로덕션 | 초안 | `release_ops_agent` |
 
 ## E. 값 분리 규칙

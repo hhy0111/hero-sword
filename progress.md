@@ -3291,5 +3291,25 @@ Original prompt: 현재까지 진행상황 체크해줘. 게임 웹에서 실행
   - `jarsigner -verify -verbose -certs android/app/build/outputs/bundle/release/app-release.aab` reports `jar is unsigned`.
   - `Invoke-WebRequest https://hhy0111.github.io/hero-sword/privacy-policy.html` returned HTTP 200 and title `히어로소드 개인정보처리방침 | Hero Sword Privacy Policy`.
 - Remaining blockers:
-  - signed AAB still needs a release/upload key.
+  - Android real-device ad/IAP flows still need device verification.
+
+## 2026-05-19 signed AAB preparation
+
+- Goal:
+  - create a Google Play-uploadable signed AAB for internal testing.
+- File handling:
+  - `PATCH`: `.gitignore` - excludes local signing files: `android/keystore.properties`, `android/keystores/`, `*.jks`, `*.keystore`.
+  - `PATCH`: `android/app/build.gradle` - loads release signing config from local `android/keystore.properties` when present.
+  - `LOCAL_ONLY`: `android/keystores/hero-sword-upload-key.jks` - generated upload keystore, not committed.
+  - `LOCAL_ONLY`: `android/keystore.properties` - generated signing passwords/config, not committed.
+  - `LOCAL_ONLY`: `output/hero-sword-1.0-vc1-signed.aab` - copied signed AAB for Play Console upload.
+- Verification:
+  - `npm run build:android` passed.
+  - `JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-21.0.10.7-hotspot android\gradlew.bat -p android bundleRelease` passed.
+  - `jarsigner -verify android/app/build/outputs/bundle/release/app-release.aab` returned exit code 0 with `jar verified` and no `jar is unsigned`.
+  - Signed AAB: `android/app/build/outputs/bundle/release/app-release.aab`, `243,263,415` bytes.
+  - Upload copy: `output/hero-sword-1.0-vc1-signed.aab`, `243,263,415` bytes.
+- Remaining blockers:
+  - Back up the local keystore and `android/keystore.properties`; losing them can block future updates.
+  - Play Console data safety still needs console-side save confirmation.
   - Android real-device ad/IAP flows still need device verification.

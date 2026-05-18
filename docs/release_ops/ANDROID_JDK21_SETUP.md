@@ -30,7 +30,7 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 android\gradlew.bat -p android bundleRelease
 ```
 
-위 임시 명령으로 `android/app/build/outputs/bundle/release/app-release.aab` 생성은 가능하다. 단, Play Console 업로드용 signed AAB를 만들려면 release/upload keystore 설정이 별도로 필요하다.
+위 임시 명령으로 `android/app/build/outputs/bundle/release/app-release.aab` 생성이 가능하다. `android/keystore.properties`와 `android/keystores/hero-sword-upload-key.jks`가 로컬에 있으면 release AAB는 signed 상태로 생성된다.
 
 ## 점검 포인트
 
