@@ -224,3 +224,5 @@
 - [x] GitHub Pages 설정 후 `https://hhy0111.github.io/hero-sword/privacy-policy.html` 접근을 확인한다.
 - [ ] Play Console 데이터 세이프티 저장 완료를 콘솔에서 확인한다.
 - [x] Play Console 내부 테스트 업로드용 signed AAB를 생성한다.
+- [x] Play Console 일회성 상품 5개를 앱 상품 ID와 구매 옵션 ID 기준으로 정리하고 앱 내 노출을 반영한다.
+- [ ] RevenueCat Android API Key 운영값을 반영하고 실제 Android 결제 조회를 확인한다.

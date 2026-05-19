@@ -3313,3 +3313,34 @@ Original prompt: 현재까지 진행상황 체크해줘. 게임 웹에서 실행
   - Back up the local keystore and `android/keystore.properties`; losing them can block future updates.
   - Play Console data safety still needs console-side save confirmation.
   - Android real-device ad/IAP flows still need device verification.
+
+## 2026-05-19 monetization product hookup
+
+- Goal:
+  - align the app with the five Play Console one-time products registered for Hero Sword.
+- File handling:
+  - `ADD_NEW`: `src/game/data/cashProducts.ts` - shared cash product definitions for the paid shop.
+  - `PATCH`: `src/game/scenes/CashShopScene.ts` - shows starter pack, small fatigue pack, large fatigue pack, and gem bundle in the paid shop.
+  - `PATCH`: `src/config/runtime.ts` - orders products to match the Play Console registration list and sets paid ten-summon price label to `₩1,500`.
+  - `PATCH`: `src/game/scenes/ShopScene.ts` - fixes legacy cash item descriptions to the current 100-point fatigue economy.
+  - `PATCH`: `src/config/runtime.ts` - reads RevenueCat Android API Key from `VITE_REVENUECAT_ANDROID_API_KEY` while keeping the placeholder fallback.
+  - `PATCH`: `.gitignore` and `SECRETS_POLICY.md` - exclude local env files and document RevenueCat secret handling.
+  - `ADD_NEW`: `tests/monetizationProducts.test.ts` - locks the product ID list and gem bundle grant.
+  - `PATCH`: `docs/release_ops/RELEASE_INPUTS.md` - records product IDs, purchase option IDs, prices, and app connection points.
+- Verification:
+  - Expected failing test first: `tests/monetizationProducts.test.ts` failed because runtime product order did not match the Play Console registration order.
+  - `tests/monetizationProducts.test.ts` then passed after applying product order and paid-shop mapping.
+  - Browser QA on `http://127.0.0.1:5173` captured `output/monetization-products-2026-05-19/cash-shop.png`; render state showed four paid-shop products: starter, small fatigue, large fatigue, gem bundle.
+  - Browser QA captured `output/monetization-products-2026-05-19/gacha.png`; render state exposed `summon_paid_ten` and `summon_ad_ten` actions.
+  - Browser QA console/page errors: `[]`.
+  - `npm run typecheck` passed.
+  - `npm test` passed 19 files / 81 tests.
+  - `npm run build` passed.
+  - `npm run test:smoke` passed.
+  - `npm run build:android` passed.
+  - `JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-21.0.10.7-hotspot android\gradlew.bat -p android bundleRelease` passed.
+  - `jarsigner -verify android/app/build/outputs/bundle/release/app-release.aab` returned exit code 0 with `jar verified` and no `jar is unsigned`.
+  - Updated signed AAB copy: `output/hero-sword-1.0-vc1-signed.aab`, `243,263,432` bytes.
+- Remaining blockers:
+  - RevenueCat Android API Key is still required for actual native product lookup and purchase.
+  - Real purchase flow must be verified on Android with a licensed/internal test account.

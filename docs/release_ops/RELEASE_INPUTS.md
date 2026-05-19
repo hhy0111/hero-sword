@@ -59,12 +59,19 @@
 
 ## C. 결제 관련
 
-| 상품명 | 상품 ID | 유형 | 가격 정책 | 소비형 | 복원 | 상태 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 초보자 패키지 | `hs_pack_beginner_01` | 패키지 | `₩1,500` | 아니오 | 예 | 확정 |
-| 피로도 팩 소형 | `hs_fatigue_small_01` | 소모성 | `₩1,200` | 예 | 아니오 | 확정 |
-| 피로도 팩 대형 | `hs_fatigue_large_01` | 소모성 | `₩2,400` | 예 | 아니오 | 확정 |
-| 프리미엄 재화 묶음 1 | `hs_gem_bundle_01` | 소모성 | `₩7,900` | 예 | 아니오 | 확정 |
+| 상품명 | 상품 ID | 구매 옵션 ID | 유형 | 가격 정책 | 소비형 | 복원 | 상태 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 초보자 패키지 | `hs_pack_beginner_01` | `hs-pack-beginner-01` | 패키지 | `₩1,500` | 아니오 | 예 | Play Console 등록 확인 |
+| 피로도 팩 소형 | `hs_fatigue_small_01` | `hs-fatigue-small-01` | 소모성 | `₩1,200` | 예 | 아니오 | Play Console 등록 확인 |
+| 유료 10회 소환 | `hs_paid_ten_summon_01` | `hs-paid-ten-summon-01` | 소모성 | `₩1,500` | 예 | 아니오 | Play Console 등록 확인 |
+| 피로도 팩 대형 | `hs_fatigue_large_01` | `hs-fatigue-large-01` | 소모성 | `₩2,400` | 예 | 아니오 | Play Console 등록 확인 |
+| 프리미엄 보석 묶음 1 | `hs_gem_bundle_01` | `hs-gem-bundle-01` | 소모성 | `₩7,900` | 예 | 아니오 | Play Console 등록 확인 |
+
+앱 내 연결:
+- 현금 상점: `hs_pack_beginner_01`, `hs_fatigue_small_01`, `hs_fatigue_large_01`, `hs_gem_bundle_01`
+- 소환의 제단 유료 10회 버튼: `hs_paid_ten_summon_01`
+- RevenueCat Android API Key는 로컬 전용 `.env.production.local`의 `VITE_REVENUECAT_ANDROID_API_KEY`로 주입한다.
+- `.env*.local`은 git 제외 대상이다.
 
 ## D. 출시 준비 관련
 

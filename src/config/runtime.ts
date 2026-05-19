@@ -39,7 +39,7 @@ export const runtimeConfig = {
   },
   iap: {
     provider: '@revenuecat/purchases-capacitor',
-    androidApiKey: 'YOUR_VALUE_HERE_REVENUECAT_ANDROID_API_KEY',
+    androidApiKey: import.meta.env.VITE_REVENUECAT_ANDROID_API_KEY ?? 'YOUR_VALUE_HERE_REVENUECAT_ANDROID_API_KEY',
     mockWebResults: useMockStoreResults,
     products: [
       {
@@ -65,6 +65,17 @@ export const runtimeConfig = {
         },
       },
       {
+        id: 'hs_paid_ten_summon_01',
+        category: 'NON_SUBSCRIPTION',
+        priceLabel: '₩1,500',
+        grant: {
+          gold: 0,
+          premiumCurrency: 0,
+          fatigue: 0,
+          onceOnly: false,
+        },
+      },
+      {
         id: 'hs_fatigue_large_01',
         category: 'NON_SUBSCRIPTION',
         priceLabel: '₩2,400',
@@ -82,17 +93,6 @@ export const runtimeConfig = {
         grant: {
           gold: 0,
           premiumCurrency: 980,
-          fatigue: 0,
-          onceOnly: false,
-        },
-      },
-      {
-        id: 'hs_paid_ten_summon_01',
-        category: 'NON_SUBSCRIPTION',
-        priceLabel: 'SAMPLE_PAID_TEN_SUMMON_PRICE',
-        grant: {
-          gold: 0,
-          premiumCurrency: 0,
           fatigue: 0,
           onceOnly: false,
         },

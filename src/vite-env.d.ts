@@ -1,5 +1,9 @@
 /// <reference types="vite/client" />
 
+interface ImportMetaEnv {
+  readonly VITE_REVENUECAT_ANDROID_API_KEY?: string;
+}
+
 declare global {
   interface HeroSwordDebugTools {
     getActiveScene: () => string | null;

@@ -1,5 +1,11 @@
 import Phaser from 'phaser';
 import { AtlasFrame } from '../data/atlas';
+import {
+  CASH_PRODUCT_BY_ID,
+  CASH_PRODUCTS,
+  type CashProductDefinition,
+  type CashProductId,
+} from '../data/cashProducts';
 import { SHOP_RUNTIME_IMAGE_KEYS } from '../data/shopRuntimeArt';
 import { loadSnapshot, saveSnapshot } from '../services/save';
 import type { SaveSnapshot } from '../types';
@@ -10,19 +16,6 @@ import {
   listStoreProducts,
   purchaseConfiguredProduct,
 } from '../../platform/store';
-
-type CashProductId = 'hs_pack_beginner_01' | 'hs_fatigue_small_01' | 'hs_fatigue_large_01';
-
-interface CashProductDefinition {
-  id: CashProductId;
-  title: string;
-  subtitle: string;
-  description: string;
-  grantLines: readonly string[];
-  thumbKey: string;
-  detailKey: string;
-  defaultPrice: string;
-}
 
 interface CashProductRow {
   productId: CashProductId;
@@ -36,43 +29,6 @@ interface CashProductRow {
   priceBack: Phaser.GameObjects.Rectangle;
   priceText: Phaser.GameObjects.Text;
 }
-
-const CASH_PRODUCTS: readonly CashProductDefinition[] = [
-  {
-    id: 'hs_pack_beginner_01',
-    title: '스타터 팩',
-    subtitle: '계정 1회 | 초반 성장 보급',
-    description: '초반 진행에 필요한 기본 재화를 한 번에 지급하는 유료 상품입니다.',
-    grantLines: ['골드 +500', '보석 +300', '피로도 +9'],
-    thumbKey: SHOP_RUNTIME_IMAGE_KEYS.cashStarterPackThumb,
-    detailKey: SHOP_RUNTIME_IMAGE_KEYS.cashStarterPackDetail,
-    defaultPrice: '₩1,500',
-  },
-  {
-    id: 'hs_fatigue_small_01',
-    title: '피로도 팩',
-    subtitle: '반복 구매 | 피로도 충전',
-    description: '출정을 더 이어가고 싶을 때 피로도를 즉시 회복하는 유료 상품입니다.',
-    grantLines: ['피로도 +18'],
-    thumbKey: SHOP_RUNTIME_IMAGE_KEYS.cashFatiguePackThumb,
-    detailKey: SHOP_RUNTIME_IMAGE_KEYS.cashFatiguePackDetail,
-    defaultPrice: '₩1,200',
-  },
-  {
-    id: 'hs_fatigue_large_01',
-    title: '피로도 팩 대형',
-    subtitle: '반복 구매 | 15회 입장분',
-    description: '긴 플레이를 이어가고 싶을 때 피로도를 크게 회복하는 유료 상품입니다.',
-    grantLines: ['피로도 +45'],
-    thumbKey: SHOP_RUNTIME_IMAGE_KEYS.cashFatiguePackThumb,
-    detailKey: SHOP_RUNTIME_IMAGE_KEYS.cashFatiguePackDetail,
-    defaultPrice: '₩2,400',
-  },
-] as const;
-
-const PRODUCT_BY_ID = new Map<CashProductId, CashProductDefinition>(
-  CASH_PRODUCTS.map((product) => [product.id, product]),
-);
 
 export class CashShopScene extends Phaser.Scene {
   private snapshot!: SaveSnapshot;
@@ -167,9 +123,9 @@ export class CashShopScene extends Phaser.Scene {
       strokeThickness: 3,
     });
 
-    CASH_PRODUCTS.forEach((product, index) => this.createProductRow(product, 188 + index * 82));
+    CASH_PRODUCTS.forEach((product, index) => this.createProductRow(product, 176 + index * 70));
 
-    this.statusText = this.add.text(38, 408, '상품을 선택하면 상세 정보를 확인할 수 있습니다.', {
+    this.statusText = this.add.text(38, 448, '상품을 선택하면 상세 정보를 확인할 수 있습니다.', {
       fontFamily: 'Segoe UI',
       fontSize: '12px',
       color: '#e7d6ac',
@@ -189,22 +145,22 @@ export class CashShopScene extends Phaser.Scene {
   }
 
   private createProductRow(product: CashProductDefinition, y: number): void {
-    const card = this.add.rectangle(180, y, 304, 66, 0x101923, 0.82)
+    const card = this.add.rectangle(180, y, 304, 58, 0x101923, 0.82)
       .setStrokeStyle(1, 0xe3c98c, 0.18);
     const frame = this.textures.exists(SHOP_RUNTIME_IMAGE_KEYS.uiOfferRowNormal)
-      ? this.add.image(180, y, SHOP_RUNTIME_IMAGE_KEYS.uiOfferRowNormal).setDisplaySize(304, 66)
+      ? this.add.image(180, y, SHOP_RUNTIME_IMAGE_KEYS.uiOfferRowNormal).setDisplaySize(304, 58)
       : null;
-    const hitZone = this.add.rectangle(180, y, 304, 66, 0x000000, 0)
+    const hitZone = this.add.rectangle(180, y, 304, 58, 0x000000, 0)
       .setInteractive({ useHandCursor: true });
-    const thumbBack = this.add.rectangle(66, y, 46, 46, 0x16202b, 0.92)
+    const thumbBack = this.add.rectangle(66, y, 42, 42, 0x16202b, 0.92)
       .setStrokeStyle(1, 0xf1d38e, 0.2);
     const thumb = this.textures.exists(product.thumbKey)
       ? this.add.image(66, y, product.thumbKey)
       : null;
     if (thumb) {
-      fitImageInside(thumb, 40, 40);
+      fitImageInside(thumb, 36, 36);
     }
-    const titleText = this.add.text(96, y - 22, product.title, {
+    const titleText = this.add.text(96, y - 20, product.title, {
       fontFamily: 'Segoe UI',
       fontSize: '16px',
       fontStyle: 'bold',
@@ -219,9 +175,9 @@ export class CashShopScene extends Phaser.Scene {
       stroke: '#17110c',
       strokeThickness: 2,
     });
-    const priceBack = this.add.rectangle(270, y + 18, 62, 20, 0x060b12, 0.72)
+    const priceBack = this.add.rectangle(270, y + 17, 62, 20, 0x060b12, 0.72)
       .setStrokeStyle(1, 0xe3c98c, 0.18);
-    const priceText = this.add.text(270, y + 18, product.defaultPrice, {
+    const priceText = this.add.text(270, y + 17, product.defaultPrice, {
       fontFamily: 'Segoe UI',
       fontSize: '11px',
       fontStyle: 'bold',
@@ -245,12 +201,12 @@ export class CashShopScene extends Phaser.Scene {
       row.card.setStrokeStyle(selected ? 2 : 1, selected ? 0xf1d38e : 0xe3c98c, selected ? 0.56 : 0.18);
       row.thumbBack.setStrokeStyle(selected ? 2 : 1, selected ? 0xf1d38e : 0xe3c98c, selected ? 0.38 : 0.2);
       row.priceBack.setStrokeStyle(selected ? 2 : 1, selected ? 0xf1d38e : 0xe3c98c, selected ? 0.42 : 0.18);
-      row.priceText.setText(this.getPriceLabel(PRODUCT_BY_ID.get(row.productId)!));
+      row.priceText.setText(this.getPriceLabel(CASH_PRODUCT_BY_ID.get(row.productId)!));
     });
   }
 
   private openDetail(productId: CashProductId): void {
-    const product = PRODUCT_BY_ID.get(productId);
+    const product = CASH_PRODUCT_BY_ID.get(productId);
     if (!product) {
       return;
     }
@@ -385,8 +341,8 @@ export class CashShopScene extends Phaser.Scene {
     }
 
     for (const product of products) {
-      if (product.id === 'hs_pack_beginner_01' || product.id === 'hs_fatigue_small_01' || product.id === 'hs_fatigue_large_01') {
-        this.priceLabels.set(product.id, product.priceLabel);
+      if (CASH_PRODUCT_BY_ID.has(product.id as CashProductId)) {
+        this.priceLabels.set(product.id as CashProductId, product.priceLabel);
       }
     }
     this.refreshRows();

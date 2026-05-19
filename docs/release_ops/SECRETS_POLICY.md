@@ -20,6 +20,8 @@
 - 문서에는 입력 위치만 기록한다.
 - Android release 서명값은 로컬 전용 `android/keystore.properties`와 `android/keystores/`에만 둔다.
 - `android/keystore.properties`, `android/keystores/`, `*.jks`, `*.keystore`는 git 제외 대상이다.
+- RevenueCat Android API Key는 로컬 전용 `.env.production.local`의 `VITE_REVENUECAT_ANDROID_API_KEY`에만 둔다.
+- `.env*.local`은 git 제외 대상이다.
 
 ## 위반 예시
 

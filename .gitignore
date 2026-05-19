@@ -5,6 +5,7 @@ coverage/
 output/
 .vite/
 logs/
+.env*.local
 tmp-*
 tmp_*
 __pycache__/
